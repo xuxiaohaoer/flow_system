@@ -22,4 +22,5 @@ urlpatterns = [
     path('flow_collect/', include('flow_collect.urls')),
     path('flow_cut/', include('flow_cut.urls')),
     path('feature_extract', include('feature_extract.urls')),
+    
 ]
