@@ -1,0 +1,10 @@
+model_use:mult_bilstm
+feature_type:mix
+feature_dir:f_data_standard
+hidden_num:144
+batch_size:32
+word_num:55
+word_len:4
+client_hello:20
+server_hello:10
+certificate:25

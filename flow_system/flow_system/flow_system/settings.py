@@ -34,6 +34,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'flow_collect',
     'flow_cut',
+    'feature_extract',
+    'home',
+    'model_test',
+    'model_train',
+    'result_show',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'flow_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,8 +128,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+

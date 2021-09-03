@@ -1,0 +1,16 @@
+model_use:mult_bilstm
+feature_type:mix
+feature_dir:f_data_compare_3
+hidden_num:144
+batch_size:32
+word_num:55
+word_len:4
+client_hello:20
+server_hello:10
+certificate:25
+[[2554  368]
+ [  89 3116]]
+acc:0.9254
+pre:0.9663
+rec:0.8741
+f1:0.9179

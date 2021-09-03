@@ -37,11 +37,11 @@ def flow_ana(flow_record, type):
     base_path = "/Users/xuhao/研一项目/检测系统/flow_system/flow_system/flow_system/data_cut/"
     if not os.path.exists(base_path):
         os.mkdir(base_path)
+    if not os.path.exists(base_path + 'flow/'):
+        os.mkdir(base_path + 'flow/')
+    if not os.path.exists(base_path + 'tls/'):
+        os.mkdir(base_path + 'tls/')
     for key in flow_record:
-        if not os.path.exists(base_path):
-            os.mkdir(base_path)
-            
-
         flag = False
         for record in flow_record[key]:
             eth = record[0]
