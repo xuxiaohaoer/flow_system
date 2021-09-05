@@ -11,8 +11,11 @@ def show(request):
     #使用Paginator模块对数据分页，一页5条数据
     paginator = Paginator(black_list, 30)
     #使用request.GET.get()函数获取uri中的page参数的数值
-    page = request.GET.get('page')
-    currentPage = int(page)
+    try:
+        page = request.GET.get('page')
+        currentPage = int(page)
+    except TypeError as e:
+        currentPage = 1
     if paginator.num_pages > 15:
         if currentPage-5 < 1:
             pageRange = range(1,11)

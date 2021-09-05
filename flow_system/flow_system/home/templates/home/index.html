@@ -1,5 +1,23 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/home/css/index.css">
+</head>
+<body>
 <div><p>流量检测系统</p></div>
+{% load staticfiles %}
+<link rel="shortcut icon"  href="{% static "/home/ip_p4.jpg" %}" />
 <div>
+ <div class="row div_function">
+    <div class="col-xs-4">
+        <div class="panel panel-default" id="pFunc1">
+            <div class="panel-body">
+                <strong>店铺</strong>
+                <img  class ="iv_function" src="static/home/images/ic_store.svg">
+        </div>
+    </div>
+</div>
 <table>
 <tr>
 <td>
@@ -26,3 +44,4 @@
 
 </table>
 </div>
+</body>

@@ -99,8 +99,9 @@ def pcap_ana(filename, type):
                 capture = dpkt.pcapng.Reader(f)
             elif "pcap" in filename:
                 capture = dpkt.pcap.Reader(f)
-        except:
-            caputre = []
+        except ValueError as e:
+            # Invalid tcpdump header
+            capture = []
             print("wrong:", filename)
 
         # try:
