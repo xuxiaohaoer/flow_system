@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 
 
-def show(request):
+def show_tls(request):
     from model_test.models import TlsRes
     black_list = TlsRes.objects.filter(result='black')
     num_black = len(black_list)
@@ -33,7 +33,7 @@ def show(request):
         contacts = paginator.page(1)
     except (EmptyPage, InvalidPage):
         contacts = paginator.page(paginator.num_pages)
-    return render(request, "result_show/show.html", {'subject_list': contacts,
+    return render(request, "result_show/show_tls.html", {'subject_list': contacts,
                                                      'page_range':pageRange, 
                                                      'num_black':num_black,
                                                      'num_white':num_white,
