@@ -126,15 +126,15 @@ def pre_data_Image():
 def pre_data_stand(feature_type, length, dir):
     # base_dir = "f_data_standard"
     base_dir = dir
-    d_train_b = np.load("./data_feature/train_black.npy", allow_pickle=True)
-    d_train_w = np.load("./data_feature/train_white.npy", allow_pickle=True)
-    d_test_b = np.load("./data_feature/test_black.npy", allow_pickle=True)
-    d_test_w = np.load("./data_feature/test_white.npy", allow_pickle=True)
+    d_train_b = np.load("./data_feature/tls/train_black.npy", allow_pickle=True)
+    d_train_w = np.load("./data_feature/tls/train_white.npy", allow_pickle=True)
+    d_test_b = np.load("./data_feature/tls/test_black.npy", allow_pickle=True)
+    d_test_w = np.load("./data_feature/tls/test_white.npy", allow_pickle=True)
     d_train = []
     d_test = []
     for key in d_train_b:
         d_train.append(key)
-    for key in d_train_b:
+    for key in d_train_w:
         d_train.append(key)
     for key in d_test_b:
         d_test.append(key)
