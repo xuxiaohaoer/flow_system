@@ -3,8 +3,8 @@ import os
 import socket
 import csv
 from .constants import PRETTY_NAMES
-
-
+from flow_cut.models import Pcaps_cut
+from django.utils import timezone
 # dataset = "stratosphere"
 # dataset = "lastline"
 dataset = "non_vpn"
@@ -24,17 +24,17 @@ def pretty_name(name_type, name_value):
     return name_value
 
 
-def flow_pre_cut(type):
+def flow_pre_cut():
 
-    dir = "/Users/xuhao/研一项目/检测系统/flow_system/flow_system/flow_system/data_raw/"
+    dir = "./data_raw/"
 
     for i, filename in enumerate(os.listdir(dir)):
         if 'pcap' in filename: 
             pcap_ana(dir + filename, filename)
 
 
-def flow_ana(flow_record, type):
-    base_path = "/Users/xuhao/研一项目/检测系统/flow_system/flow_system/flow_system/data_cut/"
+def flow_ana(flow_record, name):
+    base_path = "./data_cut/"
     if not os.path.exists(base_path):
         os.mkdir(base_path)
     if not os.path.exists(base_path + 'flow/'):
@@ -66,6 +66,12 @@ def flow_ana(flow_record, type):
 
         if flag:
             path = base_path + 'tls/' + str(key)
+            
+            pub_date = timezone.now()
+            tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="tls")
+            tem.save()
+     
+            
             test = open(path + ".pcap", "ab")
             writer = dpkt.pcap.Writer(test)
             timestamp = flow_record[key][0][1]
@@ -78,6 +84,11 @@ def flow_ana(flow_record, type):
             test.close()
         else:
             path = base_path + 'flow/' + str(key) 
+
+            pub_date = timezone.now()
+            tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="flow")
+            tem.save()
+
             test = open(path + ".pcap", "ab")
             writer = dpkt.pcap.Writer(test)
             timestamp = flow_record[key][0][1]
@@ -92,7 +103,7 @@ def flow_ana(flow_record, type):
 
 
 
-def pcap_ana(filename, type):
+def pcap_ana(filename, name):
     with open(filename, 'rb') as f:
         try:
             if "pcapng" in filename:
@@ -136,4 +147,4 @@ def pcap_ana(filename, type):
                 pass
         if filename == "AIMchat1.pcapng":
             print("123")
-        flow_ana(flow_record, type)
+        flow_ana(flow_record, name)

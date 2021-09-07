@@ -269,7 +269,10 @@ class featureType(object):
             # data[key] = res
             # data[key] = res
         from feature_extract.models import tls_feature
+
         import json
+
+
         t = tls_feature(client_hello=json.dumps(data['client_hello']), server_hello=json.dumps(data['server_hello']), certificate=json.dumps(data['certificate']), name=self.name, label=self.label)
         t.save()
 
