@@ -210,7 +210,7 @@ class featureType(object):
                 self.transition_matrix,
                 self.tls_seq, self.payload_seq, self.dir_seq,
                 self.client_hello_num, self.server_hello_num, self.certificate_num,
-                self.label, self.name,self.pk_src_s,self.pk_dst_s,self.sum_time_src,self.sum_time_dst,self.var_packetsize_packet
+                self.pk_src_s,self.pk_dst_s,self.sum_time_src,self.sum_time_dst,self.var_packetsize_packet, self.label, self.name,
                 ]
         # self.entropy, self.bitFre, self.max_entropy, self.min_entropy, self.mean_entropy, self.std_entropy,
         # # 69

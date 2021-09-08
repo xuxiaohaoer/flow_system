@@ -13,5 +13,5 @@ def index(request):
     os.system("sudo tcpdump -c100 -i en0 -w ./data_raw/{}.pcap".format(str(name).replace(" ","_")))
     tem = Pcap(name=str(name), date=pub_date)
     tem.save()
-    return render(request, 'flow_collect/collect_test.html')
+    return render(request, 'flow_collect/collect.html')
 # Create your views here.

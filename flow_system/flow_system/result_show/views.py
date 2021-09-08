@@ -40,3 +40,12 @@ def show_tls(request):
                                                      'now':page,
     })
 
+
+def show_MT(request):
+
+    return render(request, "result_show/result_MT.html")
+
+
+def show_HAE(request):
+
+    return render(request, "result_show/result_HAE.html")
