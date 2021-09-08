@@ -59,10 +59,8 @@ def MT_test(data_seed=0):
     LOG.info("Saved tensorboard graph to %r", tensorboard_dir)
 
     trojan = COMPARE(data_seed, n_labeled, n_extra_unlabeled, True)
-    training_batches = minibatching.training_batches(trojan.training, n_labeled_per_batch=50)
     evaluation_batches_fn = minibatching.evaluation_epoch_generator(trojan.evaluation)
     model.evaluate(evaluation_batches_fn)
-
 
 if __name__ == "__main__":
     MT_train()

@@ -4,7 +4,7 @@ from collections import Counter
 import numpy as np
 import os
 
-from tensorflow_core.python.keras.callbacks import EarlyStopping
+from tensorflow.python.keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'

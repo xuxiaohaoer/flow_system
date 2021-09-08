@@ -2,7 +2,6 @@
 import numpy as np
 import os
 
-from tensorflow_core.python.keras.callbacks import EarlyStopping
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
