@@ -40,10 +40,12 @@ class Datafile:
 
 
 class COMPARE:
-    DIR = os.path.join('data', 'images', 'compare')
+    train_path='./data_feature/MT/data/images/compare/compare_train.mat'
+    test_path='./data_feature/MT/data/images/compare/compare_test.mat'
+
     FILES = {
-        'train': Datafile(os.path.join(DIR, 'compare_train.mat'), 319000),
-        'test': Datafile(os.path.join(DIR, 'compare_test.mat'),35436)
+        'train': Datafile(train_path, 319000),
+        'test': Datafile(test_path,35436)
     }
     VALIDATION_SET_SIZE = 31900  # 10% of the training set
     UNLABELED = -1

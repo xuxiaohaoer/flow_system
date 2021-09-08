@@ -65,5 +65,5 @@ def MT_test(data_seed=0):
 
 
 if __name__ == "__main__":
-    # MT_train()
+    MT_train()
     MT_test()
