@@ -7,6 +7,8 @@
 
 "Mean teacher model"
 import tensorflow.compat.v1 as tf
+
+
 tf.disable_v2_behavior()
 
 import logging
@@ -260,7 +262,6 @@ class Model:
         self.evaluate(evaluation_batches_fn)
         self.save_checkpoint()
 
-
     def evaluate(self, evaluation_batches_fn):
         self.run(self.metric_init_op)
         for batch in evaluation_batches_fn():
@@ -288,6 +289,11 @@ class Model:
         path = self.saver.save(self.session, self.checkpoint_path, global_step=self.global_step)
         LOG.info("Saved checkpoint: %r", path)
 
+    def load(self,checkpoint_path):
+        model_file=tf.train.latest_checkpoint(checkpoint_path)
+        print(model_file,"++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        self.saver.restore(self.session, model_file)
+
     def save_tensorboard_graph(self):
         writer = tf.summary.FileWriter(self.tensorboard_path)
         writer.add_graph(self.session.graph)
@@ -302,7 +308,7 @@ def training_control(global_step, print_span, evaluation_span, max_step, name=No
         return {
             "step": global_step,
             "time_to_print": tf.equal(tf.mod(global_step, print_span), 0),
-            "time_to_evaluate": tf.equal(tf.mod(globsaveal_step, evaluation_span), 0),
+            "time_to_evaluate": tf.equal(tf.mod(global_step, evaluation_span), 0),
             "time_to_stop": tf.greater_equal(global_step, max_step),
         }
 
@@ -387,8 +393,8 @@ def tower(inputs,
         )
 
         with \
-        slim.arg_scope([wn.conv2d], **default_conv_args), \
-        slim.arg_scope(training_mode_funcs, **training_args):
+                slim.arg_scope([wn.conv2d], **default_conv_args), \
+                slim.arg_scope(training_mode_funcs, **training_args):
             #pylint: disable=no-value-for-parameter
             net = inputs
             assert_shape(net, [None, 28, 28, 1])

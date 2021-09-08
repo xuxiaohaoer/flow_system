@@ -17,10 +17,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import logging
 from datetime import datetime
 
-from .experiments.run_context import RunContext
-from .datasets import COMPARE
-from .mean_teacher.model import Model
-from .mean_teacher import minibatching
+from experiments.run_context import RunContext
+from datasets import COMPARE
+from mean_teacher.model import Model
+from mean_teacher import minibatching
 
 
 logging.basicConfig(level=logging.INFO)
@@ -55,12 +55,15 @@ def MT_test(data_seed=0):
     model['training_length'] = 6000
     model['max_consistency_cost'] = 50.0
 
-    tensorboard_dir = model.save_tensorboard_graph()
-    LOG.info("Saved tensorboard graph to %r", tensorboard_dir)
+    # tensorboard_dir = model.save_tensorboard_graph()
+    # LOG.info("Saved tensorboard graph to %r", tensorboard_dir)
 
     trojan = COMPARE(data_seed, n_labeled, n_extra_unlabeled, True)
     evaluation_batches_fn = minibatching.evaluation_epoch_generator(trojan.evaluation)
+    model.load("./results/train_compare/savedModel/0/transient/")
     model.evaluate(evaluation_batches_fn)
 
+
 if __name__ == "__main__":
-    MT_train()
+    # MT_train()
+    MT_test()
