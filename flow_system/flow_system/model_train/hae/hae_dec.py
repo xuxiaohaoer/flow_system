@@ -17,12 +17,11 @@ from time import time
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 
+train_path = "./data_feature/HAE/train_data.npy"
+test_path = "./data_feature/HAE/test_data.npy"
+saved_model_path = './modelSaved/hae/'
 
 def HAE_train():
-    train_path = "../dataset/CICIDS2017/train_data.npy"
-    test_path = "../dataset/CICIDS2017/test_data.npy"
-    saved_model_path = './savedModel/'
-
     # 模型训练与测试
     print("Read data......")
     train_data, train_ids, test_data, test_ids = read_dataset(train_path, test_path)  # ids:[sip,sport,dip,dport,types,labels]
@@ -39,10 +38,6 @@ def HAE_train():
 
 
 def HAE_test():
-    train_path = "../dataset/CICIDS2017/train_data.npy"
-    test_path = "../dataset/CICIDS2017/test_data.npy"
-    saved_model_path = './savedModel/'
-
     # 模型训练与测试
     print("Read data......")
     train_data, train_ids, test_data, test_ids = read_dataset(train_path, test_path)  # ids:[sip,sport,dip,dport,types,labels]
@@ -73,9 +68,6 @@ def HAE_test():
     #     print('异常')
 
 if __name__ == '__main__':
-    train_path = "../dataset/CICIDS2017/train_data.npy"
-    test_path = "../dataset/CICIDS2017/test_data.npy"
-    saved_model_path = './savedModel/'
 
     # 模型训练与测试
     print("Read data......")
