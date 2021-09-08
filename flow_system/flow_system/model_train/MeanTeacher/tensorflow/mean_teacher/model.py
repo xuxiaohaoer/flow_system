@@ -291,7 +291,6 @@ class Model:
 
     def load(self,checkpoint_path):
         model_file=tf.train.latest_checkpoint(checkpoint_path)
-        print(model_file,"++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         self.saver.restore(self.session, model_file)
 
     def save_tensorboard_graph(self):

@@ -60,7 +60,7 @@ def MT_test(data_seed=0):
 
     trojan = COMPARE(data_seed, n_labeled, n_extra_unlabeled, True)
     evaluation_batches_fn = minibatching.evaluation_epoch_generator(trojan.evaluation)
-    model.load("./results/train_compare/savedModel/0/transient/")
+    model.load("./modelSaved/meanTeacher/train_compare/savedModel/0/transient/")
     model.evaluate(evaluation_batches_fn)
 
 
