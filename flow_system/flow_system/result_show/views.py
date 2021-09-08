@@ -43,9 +43,9 @@ def show_tls(request):
 
 def show_MT(request):
 
-    return render(request, "result_show/result_MT.html")
+    return render(request, "result_show/show_MT.html")
 
 
 def show_HAE(request):
 
-    return render(request, "result_show/result_HAE.html")
+    return render(request, "result_show/show_HAE.html")
