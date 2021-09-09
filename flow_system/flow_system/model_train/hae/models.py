@@ -6,6 +6,7 @@ from tensorflow.keras import regularizers
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+tf.enable_eager_execution()
 
 def ae_2layer(original_dim):
     input_img = Input(shape=(original_dim,))
