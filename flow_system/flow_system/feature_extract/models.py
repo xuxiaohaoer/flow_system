@@ -12,4 +12,17 @@ class tls_feature(models.Model):
         return self.name
 
 
-# Create your models here.
+class flow_feature(models.Model):
+    name = models.CharField(max_length =100, default="null")
+    label = models.CharField(max_length=10, default='white')
+    feature = models.CharField(max_length=10000)
+    def __str__(self):
+        return self.name
+
+
+class image_feature(models.Model):
+    name = models.CharField(max_length =100, default="null")
+    label = models.CharField(max_length=10, default='white')
+    feature = models.CharField(max_length=10000)
+    def __str__(self):
+        return self.name

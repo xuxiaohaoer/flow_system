@@ -89,7 +89,7 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME':'flow',
         'USER':'root',
-        'PASSWORD':'zxq014524',
+        'PASSWORD':'xh980421',
         'HOST':'localhost',
         'PORT':'3306',
     }

@@ -1,4 +1,0 @@
-dpkt 
-pyopenssl
-openssl
-numpy

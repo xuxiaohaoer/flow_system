@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('flow_collect/', include('flow_collect.urls')),
     path('flow_cut/', include('flow_cut.urls')),
-    path('feature_extract', include('feature_extract.urls')),
+    path('feature_extract/', include('feature_extract.urls')),
 
     path('model_test/', include('model_test.urls')),
     path('model_train/', include('model_train.urls')),
