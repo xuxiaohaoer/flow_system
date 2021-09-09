@@ -8,7 +8,7 @@
 "Mean teacher model"
 import tensorflow.compat.v1 as tf
 
-
+import numpy as np
 tf.disable_v2_behavior()
 
 import logging
@@ -20,7 +20,7 @@ from tf_slim.metrics import streaming_mean, streaming_accuracy, streaming_precis
     aggregate_metric_map
 from tensorflow import metrics
 
-
+from sklearn.metrics import accuracy_score
 from . import nn
 from . import weight_norm as wn
 from .framework import ema_variable_scope, name_variable_scope, assert_shape, HyperparamVariables
@@ -247,6 +247,7 @@ class Model:
         LOG.info("Model variables initialized")
         self.evaluate(evaluation_batches_fn)
         self.save_checkpoint()
+        i=0
         for batch in training_batches:
             results, _ = self.run([self.training_metrics, self.train_step_op],
                                   self.feed_dict(batch))
@@ -264,13 +265,19 @@ class Model:
 
     def evaluate(self, evaluation_batches_fn):
         self.run(self.metric_init_op)
+        preds=np.array([])
+        labels=np.array([])
         for batch in evaluation_batches_fn():
             self.run(self.metric_update_ops,
                      feed_dict=self.feed_dict(batch, is_training=False))
+            pre_bat=self.run(self.out_prediction,feed_dict=self.feed_dict(batch, is_training=False))
+            labels=np.hstack((labels,batch['y']))
+            preds=np.hstack((preds, pre_bat))
         step = self.run(self.global_step)
         results = self.run(self.metric_values)
         self.validation_log.record(step, results)
         LOG.info("step %5d:   %s", step, self.result_formatter.format_dict(results))
+        return preds
 
     def get_training_control(self):
         return self.session.run(self.training_control)
@@ -291,6 +298,7 @@ class Model:
 
     def load(self,checkpoint_path):
         model_file=tf.train.latest_checkpoint(checkpoint_path)
+        print(model_file,"++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         self.saver.restore(self.session, model_file)
 
     def save_tensorboard_graph(self):
