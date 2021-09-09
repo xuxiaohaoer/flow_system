@@ -140,7 +140,7 @@ class DS():
         # model = LSTM_Attention(3, 256, 1).to(device)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         if flag == "load":
-            self.model.load_state_dict(torch.load(load_path))
+            self.model.load_state_dict(torch.load(load_path, map_location='cpu'))
         else:
             self.model.load_state_dict(self.best_model_wts)
         self.model.eval()
@@ -211,7 +211,8 @@ def test():
     length = 25
     feature_dir = "f_data_standard"
     system = DS(model_use = model_use, feature_type = feature_type, hidden_num = hidden_num, batch_size = batch_size, length = length, dir = feature_dir)
-    system.test_model('load', "./model_save/mix_mult_bilstm/Thu Sep  2 03:24:33 2021.pth")
+    # system.test_model('load', "./model_save/mix_mult_bilstm/Thu Sep  2 03:24:33 2021.pth")
+    system.test_model('load', "./model_save/mix_mult_bilstm/Wed Jul 21 15:51:29 2021.pth")
 
 
 if __name__ == '__main__':

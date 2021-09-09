@@ -3,124 +3,7 @@ from sklearn.model_selection import train_test_split
 import torch
 import torch.utils.data as Data
 
-def pre_data():
-    """
-    截取前144负载
-    :return:
-    """
-    d_train_b = np.load("../datacon/f_data_flow/train_black.npy", allow_pickle=True)
-    d_train_w = np.load("../datacon/f_data_flow/train_white.npy", allow_pickle=True)
-    d_test_b = np.load("../datacon/f_data_flow/test_black.npy", allow_pickle=True)
-    d_test_w = np.load("../datacon/f_data_flow/test_white.npy", allow_pickle=True)
-    d_train = np.vstack((d_train_b, d_train_w))
-    d_test = np.vstack((d_test_b, d_test_w))
-    dataset = np.vstack((d_train, d_test))
-    x = []
-    y = []
-    num_w = 0
-    num_b = 0
-    for key in dataset:
-        # content = []
-        # for value in key[0]:
-        #     content += value
-        # x.append(content)
-        x.append(key[0])
-        if key[-2] == 'white':
-            y.append(1)
-            num_w += 1
-        else:
-            y.append(0)
-            num_b += 1
-    print(num_w, num_b)
-    return x,y
 
-def pre_data_pay():
-
-    base_dir = 'f_data_payload_100'
-    d_train_b = np.load("../data/{}/train_black.npy".format(base_dir), allow_pickle=True)
-    d_train_w = np.load("../data/{}/train_white.npy".format(base_dir), allow_pickle=True)
-    d_test_b = np.load("../data/{}/test_black.npy".format(base_dir), allow_pickle=True)
-    d_test_w = np.load("../data/{}/test_white.npy".format(base_dir), allow_pickle=True)
-    d_train = np.vstack((d_train_b, d_train_w))
-    d_test = np.vstack((d_test_b, d_test_w))
-    dataset = np.vstack((d_train, d_test))
-    x = []
-    y = []
-    for key in dataset:
-        if (key[1] != 0):
-            x.append(key[0])
-            if key[-2] == 'white':
-                y.append(0)
-            else:
-                y.append(1)
-    print(len(x), len(y))
-    return x,y
-
-def pre_data_mix(feature_type):
-    """
-    位置信息、包大小、负载，对比实验
-    :return:
-    """
-    d_train_b = np.load("../data/f_data_contrast/train_black.npy", allow_pickle=True)
-    d_train_w = np.load("../data/f_data_contrast/train_white.npy", allow_pickle=True)
-    d_test_b = np.load("../data/f_data_contrast/test_black.npy", allow_pickle=True)
-    d_test_w = np.load("../data/f_data_contrast/test_white.npy", allow_pickle=True)
-    d_train = np.vstack((d_train_b, d_train_w))
-    d_test = np.vstack((d_test_b, d_test_w))
-    dataset = np.vstack((d_train, d_test))
-    x = []
-    y = []
-
-    
-    for key in dataset:
-        contents = []
-        if key[2] != 0:
-            
-            contents = []
-            if feature_type == "packet":
-                for i in range(2):
-                    contents.append(key[0][i])
-                # contents.append(key[0][0])
-                # contents.append(key[0][2])
-            elif feature_type == "bytes":
-                for i in range(1):
-                    for value in key[0][i]:
-                        contents.append([value])
-                # for value in key[0][0]:
-                #     contents.append([value])
-                # for value in key[0][2]:
-                #     contents.append([value])
-            x.append(contents)
-            if key[-2] == 'white':
-                y.append(1)
-            else:
-                y.append(0)
-    return x, y
-
-
-
-def pre_data_Image():
-
-    # base_dir = 'f_data_mix'
-    base_dir = 'f_data_image'
-    d_train_b = np.load("../data/{}/train_black.npy".format(base_dir), allow_pickle=True)
-    d_train_w = np.load("../data/{}/train_white.npy".format(base_dir), allow_pickle=True)
-    d_test_b = np.load("../data/{}/test_black.npy".format(base_dir), allow_pickle=True)
-    d_test_w = np.load("../data/{}/test_white.npy".format(base_dir), allow_pickle=True)
-    d_train = np.vstack((d_train_b, d_train_w))
-    d_test = np.vstack((d_test_b, d_test_w))
-    dataset = np.vstack((d_train, d_test))
-    x = []
-    y = []
-    for key in dataset:
-        if (key[1] != 0):
-            x.append(key[0])
-            if key[-2] == 'white':
-                y.append(0)
-            else:
-                y.append(1)
-    print(len(x), len(y))
-    return x,y
 
 
 def pre_data_stand(feature_type, length, dir):
@@ -188,13 +71,20 @@ def pre_dataset(batch_size, feature_type, length, dir):
     # x, y = pre_data_cut()
     if feature_type  in ["client_hello", "server_hello", "certificate", "mix"]:
         x_train, x_test, y_train, y_label, y_name = pre_data_stand(feature_type, length, dir)
-    elif feature_type in ["packet", "bytes"]:
-        x, y = pre_data_mix(feature_type)
-    elif feature_type in ['image']:
-        x, y = pre_data_Image()
-    elif feature_type in ['payload']:
-        x, y = pre_data_pay()
     # x, y = pre_data_mix()
+    x = []
+    y = []
+
+    for key in x_train:
+        x.append(key)
+    for key in x_test:
+        x.append(key)
+    for key in y_train:
+        y.append(key)
+    for key in y_label:
+        y.append(key)
+    
+    x_train, x_test, y_train, y_label = train_test_split(x, y, test_size=0.33, random_state=43)
     x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.2, random_state=42)
 
     x_train = torch.tensor(x_train)
@@ -227,6 +117,3 @@ def cal(sequence):
     std = np.std(seq)
     print(Max, Min, mean, std)
     return Max, Min, mean, std
-
-if __name__ == '__main__':
-    pre_data_mix("packet")
