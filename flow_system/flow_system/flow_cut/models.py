@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Pcaps_cut(models.Model):
-    name = models.CharField(max_length=50, unique=True, primary_key=True)
+    name = models.CharField(max_length=50, unique=True, default="")
     pub_date = models.DateField('date published')
     origin = models.CharField(max_length=100, default="wrong")
     label = models.CharField(max_length=100, default="test")

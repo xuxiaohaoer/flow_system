@@ -64,9 +64,10 @@ class RunContext:
         # )
         self.result_dir="./modelSaved/meanTeacher/train_compare/savedModel/0"
         self.transient_dir = self.result_dir + "/transient"
-        if os.path.exists(self.result_dir):
+        if not os.path.exists(self.result_dir):
             os.makedirs(self.result_dir)
-        if os.path.exists(self.transient_dir):
+
+        if not os.path.exists(self.transient_dir):
             os.makedirs(self.transient_dir)
 
     def create_train_log(self, name):

@@ -13,7 +13,7 @@ import scipy.io
 from .utils import random_balanced_partitions, random_partitions
 
 
-class Datafile:
+class  Datafile:
     def __init__(self, path, n_examples):
         self.path = path
         self.n_examples = n_examples

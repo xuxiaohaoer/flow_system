@@ -6,7 +6,7 @@ import tensorflow as tf
 tf.random.set_seed(4)
 import sys
 
-sys.path.append('../../')
+
 
 import numpy as np
 import os
@@ -16,7 +16,6 @@ from time import time
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-
 train_path = "./data_feature/HAE/train_data.npy"
 test_path = "./data_feature/HAE/test_data.npy"
 saved_model_path = './modelSaved/hae/'
@@ -24,6 +23,7 @@ saved_model_path = './modelSaved/hae/'
 def HAE_train():
     # 模型训练与测试
     print("Read data......")
+
     train_data, train_ids, test_data, test_ids = read_dataset(train_path, test_path)  # ids:[sip,sport,dip,dport,types,labels]
 
     clf = AE_Tree(n_clf=3, original_dim=train_data.shape[1])
