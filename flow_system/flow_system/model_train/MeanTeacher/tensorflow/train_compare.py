@@ -17,10 +17,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import logging
 from datetime import datetime
 
-from experiments.run_context import RunContext
-from datasets import COMPARE
-from mean_teacher.model import Model
-from mean_teacher import minibatching
+from .experiments.run_context import RunContext
+from .datasets import COMPARE
+from .mean_teacher.model import Model
+from .mean_teacher import minibatching
 
 
 logging.basicConfig(level=logging.INFO)
