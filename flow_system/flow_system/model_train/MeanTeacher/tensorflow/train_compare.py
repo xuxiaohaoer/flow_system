@@ -17,10 +17,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import logging
 from datetime import datetime
 
-from .experiments.run_context import RunContext
-from .datasets import COMPARE
-from .mean_teacher.model import Model
-from .mean_teacher import minibatching
+from experiments.run_context import RunContext
+from datasets import COMPARE
+from mean_teacher.model import Model
+from mean_teacher import minibatching
 
 
 logging.basicConfig(level=logging.INFO)
@@ -45,6 +45,7 @@ def MT_train(data_seed=0):
     evaluation_batches_fn = minibatching.evaluation_epoch_generator(trojan.evaluation)
     model.train(training_batches, evaluation_batches_fn)
 
+    model.train(training_batches, evaluation_batches_fn)
 def MT_test(data_seed=0):
     n_labeled = 320
     n_extra_unlabeled = 0
@@ -60,10 +61,10 @@ def MT_test(data_seed=0):
 
     trojan = COMPARE(data_seed, n_labeled, n_extra_unlabeled, True)
     evaluation_batches_fn = minibatching.evaluation_epoch_generator(trojan.evaluation)
-    model.load("./modelSaved/meanTeacher/train_compare/savedModel/0/transient/")
-    model.evaluate(evaluation_batches_fn)
+    model.load("./results/train_compare/savedModel/0/transient/")
+    preds=model.evaluate(evaluation_batches_fn) #返回预测值
 
 
 if __name__ == "__main__":
-    MT_train()
+    # MT_train()
     MT_test()
