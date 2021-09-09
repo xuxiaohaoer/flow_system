@@ -3,10 +3,11 @@ from collections import Counter
 import numpy as np
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
-
+from sklearn.model_selection import train_test_split
 def read_dataset(train_path,test_path):
     train_data = np.load(train_path, allow_pickle=True)
     test_data = np.load(test_path, allow_pickle=True)
+    _,test_data=train_test_split(test_data,test_size=0.1)
     train_ids= train_data[:, 79:]
     test_ids = test_data[:,79:]
     train_data=train_data[:,:79]
