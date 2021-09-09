@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+    <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Home</title>
+        <title>Home</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/bootstrap.min.css" >
-    <!-- Font -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/font-awesome.min.css">
-    <!-- Slicknav -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/slicknav.css">
-    <!-- Owl carousel -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="/static/home/css/owl.theme.css">
-    <!-- Animate -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/animate.css">
-    <!-- Main Style -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/main.css">
-    <!-- Extras Style -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/extras.css">
-    <!-- Responsive Style -->
-    <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
-
-  </head>
-  <body>
-
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/bootstrap.min.css" >
+        <!-- Font -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/font-awesome.min.css">
+        <!-- Slicknav -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/slicknav.css">
+        <!-- Owl carousel -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="/static/home/css/owl.theme.css">
+        <!-- Animate -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/animate.css">
+        <!-- Main Style -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/main.css">
+        <!-- Extras Style -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/extras.css">
+        <!-- Responsive Style -->
+        <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
+        <head>
+        <meta charset="utf-8">
+        <!-- 引入 ECharts 文件 -->
+        <script src="/static/echarts.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            li{
+                display:inline;
+                font-size:20px;
+            }
+            .table{
+                text-aligin:left;
+            }
+        </style>
+    </head>
+    <body>
     <!-- Header Area wrapper Starts -->
-    <header id="header-wrap">
-      <!-- Navbar Start -->
-      
-      <!-- Navbar End -->
+        <header id="header-wrap">
+        <!-- Navbar Start -->
+        
+        <!-- Navbar End -->
 
-      <!-- sliders -->
-      <div id="sliders">
-        <div class="full-width">
-          <!-- light slider -->
-          <div id="light-slider" class="carousel slide">
-            <div id="carousel-area">
-              <div id="carousel-slider" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
-                    <img src="/static/home/img/slider/bg-1.jpg" alt="">
-                    <div class="carousel-caption">
-                      <h3 class="slide-title animated fadeInDown">流量模型检测系统</h3>
-                      <h5 class="slide-text animated fadeIn">流量管理系统介绍</h5>
+        <!-- sliders -->
+            <div id="sliders">
+                <div class="full-width">
+                <!-- light slider -->
+                    <div id="light-slider" class="carousel slide">
+                        <div id="carousel-area">
+                            <div id="carousel-slider" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="carousel-item active">
+                                        <img src="/static/home/img/slider/bg-1.jpg" alt="">
+                                        <div class="carousel-caption">
+                                            <h3 class="slide-title animated fadeInDown">流量模型检测系统</h3>
+                                            <h5 class="slide-text animated fadeIn">流量管理系统介绍</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  
                 </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- End sliders -->
-
-    </header>
+        <!-- End sliders -->
+        </header>
     <!-- Header Area wrapper End -->
 
     <!-- About Section Start -->
@@ -67,17 +78,72 @@
     <!-- About Section End -->
 
     <!-- Services Section Start -->
-    <section id="services" class="section-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">HAE结果展示</h2>
-            <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
-          </div>
-        </div>
+        <section id="services" class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">HAE模型检测出恶意样本！！！</h2>
+                        <div id="main" style="width: 600px;height:400px; margin-left:250px"></div>
+                    </div>
+                    
+                </div>
+                 <div style="width:800px, height:1000px; margin-left:230px">
+            <nav>
+                <table class="table table-hover" style="width:800px;font-size:30px">
+                    <caption>检测结果</caption>
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>result</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                    {%for subject in subject_list%}
+                        <tr >
+                            <td class="text-left" style="font-size:20px">{{subject.name}}</td>
+                            <td class="text-left" style="font-size:20px">{{subject.result}}</td>
+                        </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+            
+                <ul style="">
+                    {% if subject_list.has_previous %}
+                        <li>
+                            <a href="?page={{ subject_list.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for page_num in page_range %} 
+                        {% if page_num == subject_list.number %}
+                            <li class="active">
+                                <a href="#">
+                                    {{ page_num }}(now)
+                                </a>
+                            </li>
+                        {%else%}
+                            <li>
+                                <a href="?page={{ page_num }}">{{ page_num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if  subject_list.has_next %}
+                    <li class="enabled">
+                        <a href="?page={{ subject_list.next_page_number }}" aria-label="last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>  
+            </div>
+        </section>
        
-      </div>
-    </section>
+        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
     <!-- Services Section End -->
     <!-- Portfolio Section -->
     
@@ -112,14 +178,10 @@
     <!-- Footer Section End-->
 
     <!-- Go to Top Link -->
-    <a href="#" class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </a>
+
     
     <!-- Preloader -->
-    <div id="preloader">
-      <div class="loader" id="loader-1"></div>
-    </div>
+
     <!-- End Preloader -->
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -136,6 +198,58 @@
     <script src="/static/home/js/form-validator.min.js"></script>
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
-      
+    <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+        var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '35',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: {{num_white}}, name: '正常流量'},
+                    {value: {{num_black}}, name: '恶意流量'},
+                ]
+            }
+        ]
+    };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+    </script>
+    
   </body>
 </html>
+
+
+

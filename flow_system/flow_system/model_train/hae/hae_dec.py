@@ -31,7 +31,7 @@ def HAE_train():
     # 模型训练
     print("HAE Training......")
     t1 = time()
-    clf.fit(X=train_data, y=train_data, epochs=10, batch_size=128)
+    clf.fit(X=train_data, y=train_data, epochs=1, batch_size=128)
     print("HAE Train Time:".format(time() - t1))
     print("Saving Model......")
     clf.save(saved_model_path)
@@ -58,8 +58,13 @@ def HAE_test():
 
     pre_data = pre_data.astype(int)  #测试样本预测值，0，1序列
     test_ip_port = test_ids[:, :4]  # 源ip，源port，目的IP、目的port
-
-
+    
+    from model_test.models import FlowRes
+    for i in range(len(pre_data)):
+        name = test_ip_port[i][0] + '-'+ str(test_ip_port[i][1])+ '->' + test_ip_port[i][2] + '-' + str(test_ip_port[i][3])
+        result = "abnormal" if pre_data[i] else "normal"
+        t = FlowRes(name=name, result=result)
+        t.save()
     # evaluation(test_binary_labels, pre_data) #整体性能评估
     # evaluation_types(pre_data, test_types) #攻击类别评估
 
