@@ -6,7 +6,6 @@ from tensorflow.keras import regularizers
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-tf.enable_eager_execution()
 
 def ae_2layer(original_dim):
     input_img = Input(shape=(original_dim,))
@@ -56,11 +55,11 @@ class AE_Tree():
         for clf in self.unfit_clfs:
             # 构建AE并训练
             clf.fit(X, X, batch_size=batch_size, epochs=epochs,
-                              validation_data=validation_data)
+                    validation_data=validation_data)
 
             self.clfs.append(clf)
             y_pre = clf.predict(X)
-            loss = tf.losses.mean_squared_error(X, y_pre).numpy()
+            loss = ((X-y_pre)**2).mean(axis=1)
             # 选异常分数最高的2/3数据作为下一个模型迭代的训练数据，并吧中间的异常分数作为该ae的阈值
             bad_samp_len = int(len(loss)*2/3) #学得不好的样本数目
             idx = np.argpartition(loss, -bad_samp_len)[-bad_samp_len:] #学得不好的样本索引
@@ -73,7 +72,7 @@ class AE_Tree():
         result_list = np.zeros(len(X))
         for clf in self.clfs:
             predictions = clf.predict(X)
-            loss = tf.losses.mean_squared_error(X, predictions).numpy()
+            loss = ((X-predictions)**2).mean(axis=1)
             top_x_ind = np.where(loss > clf.c)
             index_tmp = index[top_x_ind]
             X = X[top_x_ind]
@@ -84,7 +83,7 @@ class AE_Tree():
     def online_dect(self, item)->bool:
         for clf in self.clfs:
             pred=clf.predict(item)
-            loss = tf.losses.mean_squared_error(item, pred).numpy()
+            loss = ((item-pred)**2).mean(axis=1)
             if loss<clf.c:
                 return True
         return False
@@ -95,7 +94,7 @@ class AE_Tree():
             clf.save_weights(path + str(clf.name))
             thresolds.append(clf.c)
         thresolds = np.array(thresolds)
-        np.save(path+thre, thresolds)
+        np.save(thre, thresolds)
 
     def load(self, path, thre='thresolds.npy'):
         thresolds = np.load(path+thre)
@@ -136,7 +135,7 @@ class ADAE():
             # i = i+1
             # print("第",i,"个自编码器的系数是",clf.alpha)
             y_pre = clf.predict(X)
-            w = tf.losses.mean_squared_error(y, y_pre).numpy()
+            w = ((y-y_pre)**2).mean(axis=1)
             clf.c = 1 / (0.5 * math.log(np.square(np.sum(w))))
             self.clfs.append(clf)
 
