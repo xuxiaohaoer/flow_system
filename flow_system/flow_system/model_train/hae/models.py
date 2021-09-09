@@ -56,7 +56,7 @@ class AE_Tree():
         for clf in self.unfit_clfs:
             # 构建AE并训练
             clf.fit(X, X, batch_size=batch_size, epochs=epochs,
-                              validation_data=validation_data)
+                    validation_data=validation_data)
 
             self.clfs.append(clf)
             y_pre = clf.predict(X)
@@ -95,7 +95,7 @@ class AE_Tree():
             clf.save_weights(path + str(clf.name))
             thresolds.append(clf.c)
         thresolds = np.array(thresolds)
-        np.save(path+thre, thresolds)
+        np.save(thre, thresolds)
 
     def load(self, path, thre='thresolds.npy'):
         thresolds = np.load(path+thre)
@@ -136,7 +136,11 @@ class ADAE():
             # i = i+1
             # print("第",i,"个自编码器的系数是",clf.alpha)
             y_pre = clf.predict(X)
+<<<<<<< HEAD
             w = ((y,y_pre)**2).mean(axis=1)
+=======
+            w = ((y-y_pre)**2).mean(axis=1)
+>>>>>>> ec1ab85fa94bc3eb82dbb514bca5e6f9be3692fc
             clf.c = 1 / (0.5 * math.log(np.square(np.sum(w))))
             self.clfs.append(clf)
 
