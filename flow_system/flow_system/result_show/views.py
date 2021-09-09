@@ -42,8 +42,15 @@ def show_tls(request):
 
 
 def show_MT(request):
-
-    return render(request, "result_show/show_MT.html")
+    from model_test.models import ImageRes
+    black_list = ImageRes.objects.filter(result='black')
+    num_black = len(black_list)
+    white_list = ImageRes.objects.filter(result='white')
+    num_white = len(white_list)
+    return render(request, "result_show/show_MT.html" ,{
+                                                     'num_black':num_black,
+                                                     'num_white':num_white,
+                                                     })
 
 
 def show_HAE(request):
@@ -84,3 +91,4 @@ def show_HAE(request):
                                                      'num_white':num_white,
                                                      'now':page,
     })
+    
