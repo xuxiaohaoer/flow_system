@@ -94,10 +94,10 @@ class AE_Tree():
             clf.save_weights(path + str(clf.name))
             thresolds.append(clf.c)
         thresolds = np.array(thresolds)
-        np.save(thre, thresolds)
+        np.save(path+thre, thresolds)
 
     def load(self, path, thre='thresolds.npy'):
-        thresolds = np.load(thre)
+        thresolds = np.load(path+thre)
         self.clfs = []
         for i in range(len(self.unfit_clfs)):
             clf = self.unfit_clfs[i]
