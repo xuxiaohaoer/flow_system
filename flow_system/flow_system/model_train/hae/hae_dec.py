@@ -59,8 +59,8 @@ def HAE_test():
     pre_data = pre_data.astype(int)  # 测试样本预测值，0，1序列
     test_ip_port = test_ids[:, :4]  # 源ip，源port，目的IP、目的port
 
-    evaluation(test_binary_labels, pre_data)
-    evaluation_types(pre_data, test_types)
+    # evaluation(test_binary_labels, pre_data)
+    # evaluation_types(pre_data, test_types)
 
     # # 模型预测(单条流)
     # flow=test_data[0]

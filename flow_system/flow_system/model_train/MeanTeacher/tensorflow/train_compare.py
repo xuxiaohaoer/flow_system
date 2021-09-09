@@ -26,6 +26,8 @@ from .mean_teacher import minibatching
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger('main')
 
+#总的训练样本有319000
+
 
 def MT_train(data_seed=0):
     n_labeled = 320
@@ -46,6 +48,8 @@ def MT_train(data_seed=0):
     model.train(training_batches, evaluation_batches_fn)
 
     model.train(training_batches, evaluation_batches_fn)
+
+
 def MT_test(data_seed=0):
     n_labeled = 320
     n_extra_unlabeled = 0
