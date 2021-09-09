@@ -136,11 +136,7 @@ class ADAE():
             # i = i+1
             # print("第",i,"个自编码器的系数是",clf.alpha)
             y_pre = clf.predict(X)
-<<<<<<< HEAD
-            w = ((y,y_pre)**2).mean(axis=1)
-=======
             w = ((y-y_pre)**2).mean(axis=1)
->>>>>>> ec1ab85fa94bc3eb82dbb514bca5e6f9be3692fc
             clf.c = 1 / (0.5 * math.log(np.square(np.sum(w))))
             self.clfs.append(clf)
 
