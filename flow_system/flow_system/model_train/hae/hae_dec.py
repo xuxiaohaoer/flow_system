@@ -57,8 +57,7 @@ def HAE_test():
     test_types = test_ids[:, -2]
     test_binary_labels = np.array(test_labels).astype(int)
     pre_data = pre_data.astype(int)  # 测试样本预测值，0，1序列
-    test_ip_port = test_ids[:, :4]  # 源ip，源port，目的IP、目的port
-<<<<<<< HEAD
+    test_ip_port = test_ids[:, :4]  # 源ip，源port，目的IP、目的por
     
     from model_test.models import FlowRes
     for i in range(len(pre_data)):
@@ -66,13 +65,9 @@ def HAE_test():
         result = "abnormal" if pre_data[i] else "normal"
         t = FlowRes(name=name, result=result)
         t.save()
+
     # evaluation(test_binary_labels, pre_data) #整体性能评估
     # evaluation_types(pre_data, test_types) #攻击类别评估
-=======
-
-    # evaluation(test_binary_labels, pre_data)
-    # evaluation_types(pre_data, test_types)
->>>>>>> 6398236cd9458859b52db994a280a76c7b8e475c
 
     # # 模型预测(单条流)
     # flow=test_data[0]

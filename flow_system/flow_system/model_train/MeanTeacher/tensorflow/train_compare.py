@@ -49,7 +49,7 @@ def MT_train(data_seed=0):
 
     model.train(training_batches, evaluation_batches_fn)
 
-
+import numpy as np
 def MT_test(data_seed=0):
     n_labeled = 320
     n_extra_unlabeled = 0
@@ -68,8 +68,11 @@ def MT_test(data_seed=0):
     model.load("./modelSaved/meanTeacher/train_compare/savedModel/0/transient/")
  
     preds=model.evaluate(evaluation_batches_fn) #返回预测值
+    ip_ports = np.load('./data_feature/MT/data/images/ip_ports.npy', allow_pickle=True)
+    ip_ports = ip_ports[:35436, :4]  # 测试数据对应的源ip，源port，目的IP、目的port
 
-    for key in preds:
+
+for key in preds:
         from model_test.models import ImageRes
         result = "white" if key else "black"
         t = ImageRes(result =result)
