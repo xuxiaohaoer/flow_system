@@ -133,3 +133,4 @@ flow_system/flow_system/data_feature/HAE
 flow_system/flow_system/data_feature/
 data_cut/
 data_raw/
+flow_system/flow_system/flow_system/settings.py

@@ -72,9 +72,10 @@ def MT_test(data_seed=0):
     ip_ports = ip_ports[:35436, :4]  # 测试数据对应的源ip，源port，目的IP、目的port
 
 
-for key in preds:
+    for i in range(len(preds)):
         from model_test.models import ImageRes
-        result = "white" if key else "black"
-        t = ImageRes(result =result)
+        name = ip_ports[i][0] + '-'+ str(ip_ports[i][1])+ '->' + ip_ports[i][2] + '-' + str(ip_ports[i][3])
+        result = "white" if preds[i] else "black"
+        t = ImageRes(name = name, result =result)
         t.save()
 
