@@ -40,24 +40,25 @@ def HAE_train():
 def HAE_test():
     # 模型训练与测试
     print("Read data......")
-    train_data, train_ids, test_data, test_ids = read_dataset(train_path, test_path)  # ids:[sip,sport,dip,dport,types,labels]
+    train_data, train_ids, test_data, test_ids = read_dataset(train_path,
+                                                              test_path)  # ids:[sip,sport,dip,dport,types,labels]
 
-    clf = AE_Tree(n_clf=3, original_dim=train_data.shape[1])
+    clf = AE_Tree(n_clf=2, original_dim=train_data.shape[1])
 
     # 测试集评估
     print("load model.....")
     clf.load(saved_model_path)
-    t1=time()
-    pre_data = clf.predict(test_data)
-    print('HAE Test Time:', time()-t1)
+    t1 = time()
+    pre_data, losses = clf.predict(test_data)
+    print('HAE Test Time:', time() - t1)
 
     print("Test Metrics")
     test_labels = test_ids[:, -1]
-    test_types=test_ids[:, -2]
+    test_types = test_ids[:, -2]
     test_binary_labels = np.array(test_labels).astype(int)
-
-    pre_data = pre_data.astype(int)  #测试样本预测值，0，1序列
+    pre_data = pre_data.astype(int)  # 测试样本预测值，0，1序列
     test_ip_port = test_ids[:, :4]  # 源ip，源port，目的IP、目的port
+<<<<<<< HEAD
     
     from model_test.models import FlowRes
     for i in range(len(pre_data)):
@@ -67,6 +68,11 @@ def HAE_test():
         t.save()
     # evaluation(test_binary_labels, pre_data) #整体性能评估
     # evaluation_types(pre_data, test_types) #攻击类别评估
+=======
+
+    # evaluation(test_binary_labels, pre_data)
+    # evaluation_types(pre_data, test_types)
+>>>>>>> 6398236cd9458859b52db994a280a76c7b8e475c
 
     # # 模型预测(单条流)
     # flow=test_data[0]
@@ -77,40 +83,5 @@ def HAE_test():
     #     print('异常')
 
 if __name__ == '__main__':
-
-    # 模型训练与测试
-    print("Read data......")
-    train_data, train_ids, test_data, test_ids = read_dataset(train_path, test_path)  # ids:[sip,sport,dip,dport,types,labels]
-
-    clf = AE_Tree(n_clf=3, original_dim=train_data.shape[1])
-
-    # # 模型训练
-    # print("HAE Training......")
-    # t1 = time()
-    # clf.fit(X=train_data, y=train_data, epochs=10, batch_size=128)
-    # print("HAE Train Time:".format(time() - t1))
-    # print("Saving Model......")
-    # clf.save(saved_model_path)
-
-    # 测试集评估
-    print("load model.....")
-    clf.load(saved_model_path)
-    t1=time()
-    pre_data = clf.predict(test_data)
-    print('HAE Test Time:', time()-t1)
-
-    print("Test Metrics")
-    test_labels = test_ids[:, -1]
-    test_types=test_ids[:, -2]
-    test_binary_labels = np.array(test_labels).astype(int)
-    pre_data = pre_data.astype(int)
-    evaluation(test_binary_labels, pre_data)
-    evaluation_types(pre_data, test_types)
-
-    # # 模型预测(单条流)
-    # flow=test_data[0]
-    # print("load model.....")
-    # clf.load(saved_model_path)
-    # normal = clf.online_dect(flow)
-    # if normal == False:
-    #     print('异常')
+    HAE_train()
+    HAE_test()

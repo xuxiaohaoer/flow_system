@@ -71,15 +71,24 @@ class AE_Tree():
     def predict(self, X):
         index = np.arange(len(X))
         result_list = np.zeros(len(X))
+        losses = np.zeros(len(X))
+        k = len(self.clfs)
+        i = 0
         for clf in self.clfs:
             predictions = clf.predict(X)
             loss = ((X-predictions)**2).mean(axis=1)
             top_x_ind = np.where(loss > clf.c)
+            low_x_ind=np.where(loss <= clf.c)
             index_tmp = index[top_x_ind]
+            low_index_tmp=index[low_x_ind]
             X = X[top_x_ind]
+            losses[low_index_tmp]=loss[low_x_ind]
             index = index_tmp
-        result_list[index] = 1
-        return result_list
+            if i==k-1:
+                losses[index_tmp]=loss[top_x_ind]
+                result_list[index] = 1
+            i+=1
+        return result_list, losses
 
     def online_dect(self, item)->bool:
         for clf in self.clfs:
