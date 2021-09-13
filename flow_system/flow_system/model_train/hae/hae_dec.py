@@ -90,26 +90,18 @@ def HAE_test():
     #展示的特征：流持续时间,上⾏流数据包总数,下⾏流数据包总数,上⾏数据包总⻓度,下⾏数据包总⻓度
     #每秒流字节数，每秒流包数，FIN包数量，SYN包数量，RST包数量，PSH包数量，ACK包数量
     #URG包数量，CWR包数量，ECE包数量，下载上传⽐率，包平均⼤⼩
-    view_feas=raw_df[[' Flow Duration',' Total Fwd Packets',' Total Backward Packets','Total Length of Fwd Packets',' Total Length of Bwd Packets',
+    view_feas = raw_df[[' Flow Duration',' Total Fwd Packets',' Total Backward Packets','Total Length of Fwd Packets',' Total Length of Bwd Packets',
                       'Flow Bytes/s',' Flow Packets/s','FIN Flag Count',' SYN Flag Count',' RST Flag Count',' PSH Flag Count',' ACK Flag Count',
-                      ' URG Flag Count',' CWE Flag Count',' ECE Flag Count',' Down/Up Ratio',' Average Packet Size']]
+                      ' URG Flag Count',' CWE Flag Count',' ECE Flag Count',' Down/Up Ratio',' Average Packet Size']].values
     
     from model_test.models import FlowRes
     for i in range(len(pre_data)):
+        
         name = test_ip_port[i][0] + '-'+ str(test_ip_port[i][1])+ '->' + test_ip_port[i][2] + '-' + str(test_ip_port[i][3])
         result = "abnormal" if pre_data[i] else "normal"
         t = FlowRes(name=name, result=result)
         t.save()
-    # evaluation(test_binary_labels, pre_data) #整体性能评估
-    # evaluation_types(pre_data, test_types) #攻击类别评估
-
-    # # 模型预测(单条流)
-    # flow=test_data[0]
-    # print("load model.....")
-    # clf.load(saved_model_path)
-    # normal = clf.online_dect(flow)
-    # if normal == False:
-    #     print('异常')
+    return pre_data, view_feas
 
 if __name__ == '__main__':
     HAE_train()
