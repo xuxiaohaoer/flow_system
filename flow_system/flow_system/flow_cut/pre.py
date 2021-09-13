@@ -8,6 +8,7 @@ from django.utils import timezone
 # dataset = "stratosphere"
 # dataset = "lastline"
 dataset = "non_vpn"
+
 class flow():
     def __init__(self, data):
         self.data = data
@@ -27,10 +28,14 @@ def pretty_name(name_type, name_value):
 def flow_pre_cut():
 
     dir = "./data_raw/"
-
+    global num_flow
+    global num_tls
+    num_flow = 0
+    num_tls = 0
     for i, filename in enumerate(os.listdir(dir)):
         if 'pcap' in filename: 
             pcap_ana(dir + filename, filename)
+    return num_flow, num_tls
 
 
 def flow_ana(flow_record, name):
@@ -41,6 +46,7 @@ def flow_ana(flow_record, name):
         os.mkdir(base_path + 'flow/')
     if not os.path.exists(base_path + 'tls/'):
         os.mkdir(base_path + 'tls/')
+    
     for key in flow_record:
         flag = False
         for record in flow_record[key]:
@@ -65,6 +71,9 @@ def flow_ana(flow_record, name):
                     
 
         if flag:
+            global num_tls
+            num_tls += 1
+
             path = base_path + 'tls/' + str(key)
             
             pub_date = timezone.now()
@@ -83,6 +92,8 @@ def flow_ana(flow_record, name):
             test.flush()
             test.close()
         else:
+            global num_flow
+            num_flow += 1
             path = base_path + 'flow/' + str(key) 
 
             pub_date = timezone.now()

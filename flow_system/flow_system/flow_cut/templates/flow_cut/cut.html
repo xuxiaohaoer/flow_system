@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html lang="en">
+<script src="/static/echarts.min.js"></script>
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,6 +25,8 @@
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
 
+    
+ 
   </head>
   <body>
 
@@ -67,6 +69,7 @@
     <!-- About Section End -->
 
     <!-- Services Section Start -->
+    <div id="main" style="width: 800px;height:600px; margin-left:100px"></div>
     <section id="services" class="section-padding">
       <div class="container">
         <div class="row">
@@ -74,6 +77,7 @@
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">流量划分完成</h2>
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
           </div>
+          <p id="test"></p>
         </div>
        
       </div>
@@ -136,6 +140,57 @@
     <script src="/static/home/js/form-validator.min.js"></script>
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
+    <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+        var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '35',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: {{num_flow}}, name: '正常流量'},
+                    {value: {{num_tls}}, name: '加密流量'},
+                ]
+            }
+        ]
+    };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+    </script>
+          
+    
       
   </body>
 </html>
