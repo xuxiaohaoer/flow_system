@@ -142,52 +142,68 @@
     <script src="/static/home/js/main.js"></script>
     <script type="text/javascript">
             // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
 
-            // 指定图表的配置项和数据
-        var option = {
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            top: '5%',
-            left: 'center'
-        },
-        series: [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    borderRadius: 10,
-                    borderColor: '#fff',
-                    borderWidth: 2
-                },
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '35',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {value: {{num_flow}}, name: '正常流量'},
-                    {value: {{num_tls}}, name: '加密流量'},
-                ]
-            }
-        ]
-    };
+      var data = [{
+          fixed: true,
+          x: myChart.getWidth() / 2,
+          y: myChart.getHeight() / 2,
+          symbolSize: 20,
+          id: '-1'
+      }];
 
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
+      var edges = [];
+
+      option = {
+          series: [{
+              type: 'graph',
+              layout: 'force',
+              animation: false,
+              data: data,
+              force: {
+                  // initLayout: 'circular'
+                  // gravity: 0
+                  repulsion: 100,
+                  edgeLength: 5
+              },
+              edges: edges
+          }]
+      };
+      {% for dst in dsts %}
+        data.push({
+          id: {{dst}}
+        })
+      {% endfor %}
+      {% for src in srcs %}
+        data.push({
+          id: {{src}}
+        })
+      {% endfor %}
+      {% for con in connect %}
+      {
+          
+          var source = {{con.dst}};
+          var target = {{con.src}};
+          if (source !== target) {
+              edges.push({
+                  source: source,
+                  target: target
+              });
+          }
+          // console.log('nodes: ' + data.length);
+          // console.log('links: ' + data.length);
+      };
+      {% endfor %}
+      myChart.setOption({
+              series: [{
+                  roam: true,
+                  data: data,
+                  edges: edges
+              }]
+          });
+      option && myChart.setOption(option);
     </script>
           
     

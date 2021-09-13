@@ -1,3 +1,4 @@
+from typing import KeysView
 import dpkt
 import os
 import socket
@@ -35,7 +36,7 @@ def flow_pre_cut():
     for i, filename in enumerate(os.listdir(dir)):
         if 'pcap' in filename: 
             pcap_ana(dir + filename, filename)
-    return num_flow, num_tls
+    return keys
 
 
 def flow_ana(flow_record, name):
@@ -46,7 +47,8 @@ def flow_ana(flow_record, name):
         os.mkdir(base_path + 'flow/')
     if not os.path.exists(base_path + 'tls/'):
         os.mkdir(base_path + 'tls/')
-    
+    global keys
+    keys = flow_record.keys()
     for key in flow_record:
         flag = False
         for record in flow_record[key]:

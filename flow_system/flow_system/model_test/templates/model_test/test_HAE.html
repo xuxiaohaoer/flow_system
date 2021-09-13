@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/static/home/css/extras.css">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
+     <script src="/static/echarts.min.js"></script>
 
   </head>
   <body>
@@ -72,6 +73,7 @@
         <div class="row">
           <div class="col-md-12">
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">HAE模型测试完成</h2>
+            <div id="main" style="width: 1000px;height:700px; margin-left:60px"></div>
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
           </div>
         </div>
@@ -136,6 +138,45 @@
     <script src="/static/home/js/form-validator.min.js"></script>
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
-      
+    <script>
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+    option = {
+        title: {
+            text: '属性分布对比图'
+        },
+        legend: {
+            data: ['异常流量（Abnormal', '正常流量（Normal']
+        },
+        radar: {
+            // shape: 'circle',
+            indicator: [
+                { name: '流持续时间（Flow Duration）', max: 25000000},
+                { name: '上行流数据包总数（Total Fwd Packets）', max: 20},
+                { name: '下行流数据包总数（Total Backward Packets）', max: 20},
+                { name: '每秒流字节数（FLow Bytes）', max: 2000000},
+                { name: '每秒流包数（Flow Packets）', max: 100000},
+                { name: 'ACK包数量（ACK Flag Count）', max: 1}
+            ]
+        },
+        series: [{
+            name: '预算 vs 开销（Budget vs spending）',
+            type: 'radar',
+            data: [
+                {
+                    value: [{{f1_b}}, {{f2_b}}, {{f3_b}}, {{f4_b}}, {{f5_b}}, {{f6_b}}],
+                    name: '异常流量（Abnormal'
+                },
+                {
+                    value: [{{f1_w}}, {{f2_w}}, {{f3_w}}, {{f4_w}}, {{f5_w}}, {{f6_w}}],
+                    name: '正常流量（Normal'
+                }
+            ]
+        }]
+    };
+
+    option && myChart.setOption(option);
+    </script>
   </body>
 </html>
