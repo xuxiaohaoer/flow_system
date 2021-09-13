@@ -208,7 +208,7 @@ class featureType(object):
                 ]
         t = flow_feature(name=self.name, label= self.label, feature=json.dumps(list(feature)))
         t.save()
-        return [self.pack_num, time, self.flow_num, ip_src, self.packetsize_size, self.dport,
+        return [self.pack_num, self.time, self.flow_num, ip_src, self.packetsize_size, self.dport,
                 # 5
                 self.max_time, self.min_time, self.mean_time, self.std_time,
                 self.max_time_src, self.min_time_src, self.mean_time_src, self.std_time_src,

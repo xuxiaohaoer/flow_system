@@ -614,6 +614,13 @@ def pre_flow_flow(base_dir, save_dir, label):
 
     dataset_np = np.array(dataset)
     np.save(save_dir, dataset_np)
+    f_time = dataset_np[:,1]
+    f_packet = dataset_np[:,4]
+    f_spot = np.stack((f_time, f_packet), axis=-1)
+    return f_spot
+
+    
+
 
 
 

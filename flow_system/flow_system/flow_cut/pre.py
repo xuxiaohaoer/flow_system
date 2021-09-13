@@ -29,14 +29,19 @@ def pretty_name(name_type, name_value):
 def flow_pre_cut():
 
     dir = "./data_raw/"
-    global num_flow
-    global num_tls
-    num_flow = 0
-    num_tls = 0
+    
+    num_tot_flow = []
+    num_tot_tls = []
     for i, filename in enumerate(os.listdir(dir)):
         if 'pcap' in filename: 
+            global num_flow
+            global num_tls
+            num_flow = 0
+            num_tls = 0
             pcap_ana(dir + filename, filename)
-    return keys
+            num_tot_flow.append(num_flow)
+            num_tot_tls.append(num_tls)
+    return num_tot_flow, num_tot_tls
 
 
 def flow_ana(flow_record, name):
@@ -77,41 +82,41 @@ def flow_ana(flow_record, name):
             num_tls += 1
 
             path = base_path + 'tls/' + str(key)
-            
-            pub_date = timezone.now()
-            tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="tls")
-            tem.save()
-     
-            
-            test = open(path + ".pcap", "ab")
-            writer = dpkt.pcap.Writer(test)
-            timestamp = flow_record[key][0][1]
+            if not os.path.exists(path + ".pcap"):
+                pub_date = timezone.now()
+                tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="tls")
+                tem.save()
+        
+                
+                test = open(path + ".pcap", "ab")
+                writer = dpkt.pcap.Writer(test)
+                timestamp = flow_record[key][0][1]
 
-            for record in flow_record[key]:
-                eth = record[0]
-                timestamp = record[1]
-                writer.writepkt(eth, ts=timestamp)
-            test.flush()
-            test.close()
+                for record in flow_record[key]:
+                    eth = record[0]
+                    timestamp = record[1]
+                    writer.writepkt(eth, ts=timestamp)
+                test.flush()
+                test.close()
         else:
             global num_flow
             num_flow += 1
             path = base_path + 'flow/' + str(key) 
+            if not os.path.exists(path + ".pcap"):
+                pub_date = timezone.now()
+                tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="flow")
+                tem.save()
 
-            pub_date = timezone.now()
-            tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="flow")
-            tem.save()
+                test = open(path + ".pcap", "ab")
+                writer = dpkt.pcap.Writer(test)
+                timestamp = flow_record[key][0][1]
 
-            test = open(path + ".pcap", "ab")
-            writer = dpkt.pcap.Writer(test)
-            timestamp = flow_record[key][0][1]
-
-            for record in flow_record[key]:
-                eth = record[0]
-                timestamp = record[1]
-                writer.writepkt(eth, ts=timestamp)
-            test.flush()
-            test.close()
+                for record in flow_record[key]:
+                    eth = record[0]
+                    timestamp = record[1]
+                    writer.writepkt(eth, ts=timestamp)
+                test.flush()
+                test.close()
 
 
 
