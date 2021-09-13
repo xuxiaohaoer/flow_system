@@ -15,7 +15,7 @@ from .tools import read_dataset, evaluation, evaluation_types
 from time import time
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-raw_features= [' Flow Duration',' Total Fwd Packets',' Total Backward Packets',
+raw_features= [' Source IP',' Source Port',' Destination IP',' Destination Port',' Flow Duration',' Total Fwd Packets',' Total Backward Packets',
                'Total Length of Fwd Packets',' Total Length of Bwd Packets',
                ' Fwd Packet Length Max',' Fwd Packet Length Min',
                ' Fwd Packet Length Mean',' Fwd Packet Length Std',
@@ -38,7 +38,7 @@ raw_features= [' Flow Duration',' Total Fwd Packets',' Total Backward Packets',
                ' Subflow Bwd Bytes','Init_Win_bytes_forward',' Init_Win_bytes_backward',
                ' act_data_pkt_fwd',' min_seg_size_forward','Active Mean',' Active Std',
                ' Active Max',' Active Min','Idle Mean',' Idle Std',' Idle Max',
-               ' Idle Min',' Protocol_0.0',' Protocol_6.0',' Protocol_17.0',' Source IP',' Source Port',' Destination IP',' Destination Port',' Label','types']
+               ' Idle Min',' Label',' Protocol_0.0',' Protocol_6.0',' Protocol_17.0','types']
 
 
 train_path = "./data_feature/HAE/train_data.npy"
