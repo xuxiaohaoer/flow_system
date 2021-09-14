@@ -72,7 +72,7 @@ def show_MT(request):
         contacts = paginator.page(1)
     except (EmptyPage, InvalidPage):
         contacts = paginator.page(paginator.num_pages)
-    return render(request, "result_show/show_tls.html", {'subject_list': contacts,
+    return render(request, "result_show/show_MT.html", {'subject_list': contacts,
                                                      'page_range':pageRange, 
                                                      'num_black':num_black,
                                                      'num_white':num_white,

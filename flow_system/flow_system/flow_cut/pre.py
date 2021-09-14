@@ -4,7 +4,7 @@ import os
 import socket
 import csv
 from .constants import PRETTY_NAMES
-from flow_cut.models import Pcaps_cut
+from flow_cut.models import pcap_cut
 from django.utils import timezone
 # dataset = "stratosphere"
 # dataset = "lastline"
@@ -84,7 +84,7 @@ def flow_ana(flow_record, name):
             path = base_path + 'tls/' + str(key)
             if not os.path.exists(path + ".pcap"):
                 pub_date = timezone.now()
-                tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="tls")
+                tem = pcap_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="tls")
                 tem.save()
         
                 
@@ -104,7 +104,7 @@ def flow_ana(flow_record, name):
             path = base_path + 'flow/' + str(key) 
             if not os.path.exists(path + ".pcap"):
                 pub_date = timezone.now()
-                tem = Pcaps_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="flow")
+                tem = pcap_cut(name=str(key), pub_date=pub_date, origin=name, label="test", type="flow")
                 tem.save()
 
                 test = open(path + ".pcap", "ab")
