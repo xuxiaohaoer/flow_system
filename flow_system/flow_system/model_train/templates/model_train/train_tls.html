@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/static/home/css/extras.css">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
-
+    <script src="/static/echarts.min_2.js"></script>
   </head>
   <body>
 
@@ -46,7 +46,7 @@
                     <img src="/static/home/img/slider/bg-1.jpg" alt="">
                     <div class="carousel-caption">
                       <h3 class="slide-title animated fadeInDown">流量模型检测系统</h3>
-                      <h5 class="slide-text animated fadeIn">流量管理系统介绍</h5>
+                      <h5 class="slide-text animated fadeIn">本系统功能包括流量收集，流量划分，特征提取，模型训练，模型测试和结果展示</h5>
                     </div>
                   </div>
                   
@@ -72,6 +72,7 @@
         <div class="row">
           <div class="col-md-12">
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">加密模型训练完成</h2>
+            <div id="main" style="width: 800px;height:600px; margin-left:150px"></div>
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
           </div>
         </div>
@@ -136,6 +137,62 @@
     <script src="/static/home/js/form-validator.min.js"></script>
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
-      
+    <script>
+    var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+    series: [{
+        type: 'gauge',
+        progress: {
+            show: true,
+            width: 18
+        },
+        axisLine: {
+            lineStyle: {
+                width: 18
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            length: 15,
+            lineStyle: {
+                width: 2,
+                color: '#999'
+            }
+        },
+        axisLabel: {
+            distance: 25,
+            color: '#999',
+            fontSize: 20
+        },
+        anchor: {
+            show: true,
+            showAbove: true,
+            size: 25,
+            itemStyle: {
+                borderWidth: 10
+            }
+        },
+        title: {
+            show: false
+        },
+        detail: {
+            valueAnimation: true,
+            fontSize: 80,
+            offsetCenter: [0, '70%']
+        },
+        data: [{
+            value: 100
+        }]
+    }]
+};
+
+option && myChart.setOption(option);
+
+    </script>  
   </body>
 </html>

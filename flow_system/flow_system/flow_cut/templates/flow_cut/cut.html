@@ -48,7 +48,7 @@
                     <img src="/static/home/img/slider/bg-1.jpg" alt="">
                     <div class="carousel-caption">
                       <h3 class="slide-title animated fadeInDown">流量模型检测系统</h3>
-                      <h5 class="slide-text animated fadeIn">流量管理系统介绍</h5>
+                      <h5 class="slide-text animated fadeIn">本系统功能包括流量收集，流量划分，特征提取，模型训练，模型测试和结果展示</h5>
                     </div>
                   </div>
                   
@@ -69,12 +69,13 @@
     <!-- About Section End -->
 
     <!-- Services Section Start -->
-    <div id="main" style="width: 800px;height:600px; margin-left:100px"></div>
+    
     <section id="services" class="section-padding">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">流量划分完成</h2>
+            <div id="main" style="width: 800px;height:600px; margin-left:170px"></div>
             <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
           </div>
           <p id="test"></p>
@@ -141,69 +142,157 @@
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
     <script type="text/javascript">
-            // 基于准备好的dom，初始化echarts实例
+      var app = {};
+
       var chartDom = document.getElementById('main');
       var myChart = echarts.init(chartDom);
       var option;
 
-      var data = [{
-          fixed: true,
-          x: myChart.getWidth() / 2,
-          y: myChart.getHeight() / 2,
-          symbolSize: 20,
-          id: '-1'
-      }];
+      var posList = [
+          'left', 'right', 'top', 'bottom',
+          'inside',
+          'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+          'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+      ];
 
-      var edges = [];
-
-      option = {
-          series: [{
-              type: 'graph',
-              layout: 'force',
-              animation: false,
-              data: data,
-              force: {
-                  // initLayout: 'circular'
-                  // gravity: 0
-                  repulsion: 100,
-                  edgeLength: 5
-              },
-              edges: edges
-          }]
+      app.configParameters = {
+          rotate: {
+              min: -90,
+              max: 90
+          },
+          align: {
+              options: {
+                  left: 'left',
+                  center: 'center',
+                  right: 'right'
+              }
+          },
+          verticalAlign: {
+              options: {
+                  top: 'top',
+                  middle: 'middle',
+                  bottom: 'bottom'
+              }
+          },
+          position: {
+              options: posList.reduce(function (map, pos) {
+                  map[pos] = pos;
+                  return map;
+              }, {})
+          },
+          distance: {
+              min: 0,
+              max: 100
+          }
       };
-      {% for dst in dsts %}
-        data.push({
-          id: {{dst}}
-        })
-      {% endfor %}
-      {% for src in srcs %}
-        data.push({
-          id: {{src}}
-        })
-      {% endfor %}
-      {% for con in connect %}
-      {
-          
-          var source = {{con.dst}};
-          var target = {{con.src}};
-          if (source !== target) {
-              edges.push({
-                  source: source,
-                  target: target
+
+      app.config = {
+          rotate: 90,
+          align: 'left',
+          verticalAlign: 'middle',
+          position: 'insideBottom',
+          distance: 15,
+          onChange: function () {
+              var labelOption = {
+                  normal: {
+                      rotate: app.config.rotate,
+                      align: app.config.align,
+                      verticalAlign: app.config.verticalAlign,
+                      position: app.config.position,
+                      distance: app.config.distance
+                  }
+              };
+              myChart.setOption({
+                  series: [{
+                      label: labelOption
+                  }, {
+                      label: labelOption
+                  }, {
+                      label: labelOption
+                  }, {
+                      label: labelOption
+                  }]
               });
           }
-          // console.log('nodes: ' + data.length);
-          // console.log('links: ' + data.length);
       };
-      {% endfor %}
-      myChart.setOption({
-              series: [{
-                  roam: true,
-                  data: data,
-                  edges: edges
-              }]
-          });
+
+
+      var labelOption = {
+          show: true,
+          position: app.config.position,
+          distance: app.config.distance,
+          align: app.config.align,
+          verticalAlign: app.config.verticalAlign,
+          rotate: app.config.rotate,
+          formatter: '{c}  {name|{a}}',
+          fontSize: 16,
+          rich: {
+              name: {
+              }
+          }
+      };
+
+      option = {
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                  type: 'shadow'
+              }
+          },
+          legend: {
+              data: ['tls', 'flow']
+          },
+          toolbox: {
+              show: true,
+              orient: 'vertical',
+              left: 'right',
+              top: 'center',
+              feature: {
+                  mark: {show: true},
+                  dataView: {show: true, readOnly: false},
+                  magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                  restore: {show: true},
+                  saveAsImage: {show: true}
+              }
+          },
+          xAxis: [
+              {
+                  type: 'category',
+                  axisTick: {show: false},
+                  data: ['1', '2', '3', '4', '5']
+              }
+          ],
+          yAxis: [
+              {
+                  type: 'value'
+              }
+          ],
+          series: [
+              {
+                  name: 'tls',
+                  type: 'bar',
+                  barGap: 0,
+                  label: labelOption,
+                  emphasis: {
+                      focus: 'series'
+                  },
+                  data: {{num_tls}}
+              },
+              {
+                  name: 'flow',
+                  type: 'bar',
+                  label: labelOption,
+                  emphasis: {
+                      focus: 'series'
+                  },
+                  data: {{num_flow}}
+              },
+          ]
+      };
+
       option && myChart.setOption(option);
+
+
     </script>
           
     
