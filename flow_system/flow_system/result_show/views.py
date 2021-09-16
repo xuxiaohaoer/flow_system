@@ -9,7 +9,7 @@ def show_tls(request):
     white_list = TlsRes.objects.filter(result='white')
     num_white = len(white_list)
     #使用Paginator模块对数据分页，一页5条数据
-    paginator = Paginator(black_list, 30)
+    paginator = Paginator(black_list, 12)
     #使用request.GET.get()函数获取uri中的page参数的数值
     try:
         page = request.GET.get('page')
@@ -48,7 +48,7 @@ def show_MT(request):
     white_list = ImageRes.objects.filter(result='white')
     num_white = len(white_list)
     #使用Paginator模块对数据分页，一页5条数据
-    paginator = Paginator(black_list, 30)
+    paginator = Paginator(black_list, 12)
     #使用request.GET.get()函数获取uri中的page参数的数值
     try:
         page = request.GET.get('page')
@@ -88,7 +88,7 @@ def show_HAE(request):
     white_list = FlowRes.objects.filter(result='normal')
     num_white = len(white_list)
     #使用Paginator模块对数据分页，一页5条数据
-    paginator = Paginator(black_list, 30)
+    paginator = Paginator(black_list, 12)
     #使用request.GET.get()函数获取uri中的page参数的数值
     try:
         page = request.GET.get('page')

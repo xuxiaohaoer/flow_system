@@ -83,63 +83,62 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">MT模型检测出恶意样本！！！</h2>
-                        <div id="main" style="width: 600px;height:400px; margin-left:250px"></div>
-                    </div>
-                    
+                    </div> 
                 </div>
-                 <div style="width:800px, height:1000px; margin-left:230px">
-            <nav>
-                <table class="table table-hover" style="width:800px;font-size:30px">
-                    <caption>检测结果</caption>
-                    <thead>
-                        <tr>
-                            <th>ip</th>
-                            <th>label</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                    {%for subject in subject_list%}
-                        <tr >
-                            <td class="text-left" style="font-size:20px">{{subject.name}}</td>
-                            <td class="text-left" style="font-size:20px">{{subject.result}}</td>
-                        </tr>
-                    {%endfor%}
-                    </tbody>
-                </table>
-            
-                <ul style="">
-                    {% if subject_list.has_previous %}
-                        <li>
-                            <a href="?page={{ subject_list.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    {% endif %}
+                <div>
+                    <div id="main" style="width:40%;height:600px;float:left"></div>
+                    <nav style="width:60%;float:left">
+                        <table class="table table-hover" style="width:800px;font-size:20px">
+                            <thead>
+                                <tr>
+                                    <th>name</th>
+                                    <th>label</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            {%for subject in subject_list%}
+                                <tr >
+                                    <td class="text-left" style="font-size:20px">{{subject.name}}</td>
+                                    <td class="text-left" style="font-size:20px">{{subject.result}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    
+                        <ul style="">
+                            {% if subject_list.has_previous %}
+                                <li>
+                                    <a href="?page={{ subject_list.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
 
-                    {% for page_num in page_range %} 
-                        {% if page_num == subject_list.number %}
-                            <li class="active">
-                                <a href="#">
-                                    {{ page_num }}(now)
+                            {% for page_num in page_range %} 
+                                {% if page_num == subject_list.number %}
+                                    <li class="active">
+                                        <a href="#">
+                                            <b>{{ page_num }}</b>
+                                        </a>
+                                        <span>&nbsp&nbsp</span>
+                                    </li>
+                                {%else%}
+                                    <li>
+                                        <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                        <span>&nbsp&nbsp</span>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if  subject_list.has_next %}
+                            <li class="enabled">
+                                <a href="?page={{ subject_list.next_page_number }}" aria-label="last">
+                                    <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
-                        {%else%}
-                            <li>
-                                <a href="?page={{ page_num }}">{{ page_num }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                    {% if  subject_list.has_next %}
-                    <li class="enabled">
-                        <a href="?page={{ subject_list.next_page_number }}" aria-label="last">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>  
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>  
             </div>
         </section>
        
