@@ -247,7 +247,6 @@ class Model:
         LOG.info("Model variables initialized")
         self.evaluate(evaluation_batches_fn)
         self.save_checkpoint()
-        i=0
         for batch in training_batches:
             results, _ = self.run([self.training_metrics, self.train_step_op],
                                   self.feed_dict(batch))

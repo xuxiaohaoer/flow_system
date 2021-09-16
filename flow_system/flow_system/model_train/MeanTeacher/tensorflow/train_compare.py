@@ -12,6 +12,12 @@ On the other hand, the runner experiments/svhn_final_eval.py
 contains the hyperparameters used in the paper, and converges
 much more slowly but possibly to a slightly better accuracy.
 """
+import tensorflow.compat.v1 as tf
+
+import numpy as np
+tf.disable_v2_behavior()
+
+tf.reset_default_graph()
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import logging
@@ -51,6 +57,7 @@ def MT_train(data_seed=0):
 
 import numpy as np
 def MT_test(data_seed=0):
+    tf.reset_default_graph()
     n_labeled = 320
     n_extra_unlabeled = 0
 
@@ -70,6 +77,7 @@ def MT_test(data_seed=0):
     preds=model.evaluate(evaluation_batches_fn) #返回预测值
     ip_ports = np.load('./data_feature/MT/data/images/ip_ports.npy', allow_pickle=True)
     ip_ports = ip_ports[:35436, :4]  # 测试数据对应的源ip，源port，目的IP、目的port
+    print("测试完成")
 
 
     # for key in preds:
