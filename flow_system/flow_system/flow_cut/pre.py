@@ -149,8 +149,8 @@ def pcap_ana(filename, name):
             try:
                 dport = ip.data.dport
                 sport = ip.data.sport
-                flag = socket.inet_ntoa(ip.src) + '-' + str(sport) + '->' + socket.inet_ntoa(ip.dst) + '-' + str(dport)
-                flag_rev = socket.inet_ntoa(ip.dst) + '-' + str(dport) + '->' + socket.inet_ntoa(ip.src) + '-' + str(sport)
+                flag = socket.inet_ntoa(ip.src) + '-' + str(sport) + '&' + socket.inet_ntoa(ip.dst) + '-' + str(dport)
+                flag_rev = socket.inet_ntoa(ip.dst) + '-' + str(dport) + '&' + socket.inet_ntoa(ip.src) + '-' + str(sport)
                 # if dport == 443 or sport == 443:
                 if flag in flow_record.keys():
                     flow_record[flag].append([eth, timestamp])

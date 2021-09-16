@@ -21,3 +21,4 @@ class ImageRes(models.Model):
     result = models.CharField(max_length=10, default='none')
     def __str__(self):
         return self.name
+
