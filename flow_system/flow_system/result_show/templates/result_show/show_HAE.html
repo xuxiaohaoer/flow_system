@@ -57,7 +57,7 @@
                             <div id="carousel-slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner" role="listbox">
                                     <div class="carousel-item active">
-                                        <img src="/static/home/img/slider/bg-1.jpg" alt="">
+                                        <img src="/static/home/img/slider/bg-4.jpg" alt="">
                                         <div class="carousel-caption">
                                             <h3 class="slide-title animated fadeInDown">流量模型检测系统</h3>
                                             <h5 class="slide-text animated fadeIn">本系统功能包括流量收集，流量划分，特征提取，模型训练，模型测试和结果展示</h5>
@@ -82,14 +82,36 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">HAE模型检测出恶意样本！！！</h2>
+                        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.3s">HAE模型检测出异常样本！！！</h2>
                     </div>
                     
                 </div>
             <div>
-                <div id="main" style="width:40%;height:600px;float:left"></div>
+                <div id="main" style="width:40%;height:500px;float:left"></div>
                 <nav style="width:60%;float:left">
-                    <table class="table table-hover" style="width:800px;font-size:20px">
+                    <table class="table table-striped" style="width:800px;font-size:20px">
+                        <caption>ip存在风险</caption>
+                        <thead>
+                            <tr>
+                                <th>ip</th>
+                                <th>num</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        {%for black in black_top%}
+                            <tr >
+                                <td class="text-left" style="font-size:20px">{{black.ip}}</td>
+                                <td class="text-left" style="font-size:20px">{{black.num}}</td>
+                            </tr>
+                        {%endfor%}
+                        </tbody>
+                    </table>
+                </nav>
+                <div style="margin-left:200px">
+                <table class="table table-hover" style="width:800px;font-size:20px">
+                        <caption>
+                        异常流量样本
+                        </capiton>
                         <thead>
                             <tr>
                                 <th>name</th>
@@ -139,11 +161,11 @@
                         </li>
                         {% endif %}
                     </ul>
-                </nav>
+                </div>
         </div>  
             </div>
         </section>
-       
+        
         <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"> <a href="../" class="btn btn-lg btn-common animated fadeInUp"><nav style="font-size:40px">返回</nav></a></h2>
     <!-- Services Section End -->
     <!-- Portfolio Section -->

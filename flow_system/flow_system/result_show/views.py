@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
+from numpy.lib.arraysetops import _intersect1d_dispatcher
 
 
 def show_tls(request):
@@ -33,6 +34,7 @@ def show_tls(request):
         contacts = paginator.page(1)
     except (EmptyPage, InvalidPage):
         contacts = paginator.page(paginator.num_pages)
+
     return render(request, "result_show/show_tls.html", {'subject_list': contacts,
                                                      'page_range':pageRange, 
                                                      'num_black':num_black,
@@ -112,10 +114,37 @@ def show_HAE(request):
         contacts = paginator.page(1)
     except (EmptyPage, InvalidPage):
         contacts = paginator.page(paginator.num_pages)
+    
+    black_top = {}
+    for key in black_list:
+        src_list, tem, dst_list = key.name.partition("->")
+        
+        src_ip, sign, src_port = src_list.partition("-")
+        dst_ip, sign, dst_port = dst_list.partition("-")
+        if src_ip not in black_top.keys():
+            black_top[src_ip] = 1
+        else:
+            black_top[src_ip] += 1
+    black_order = sorted(black_top.items(), key = lambda x:x[1], reverse=True)
+    black_len = len(black_order)
+    black_top10 = []
+    class black_sample(object):
+        def __init__(self, ip, num):
+            super().__init__()
+            self.ip = ip
+            self.num = num
+
+    for i in range(min(10, black_len)):
+        black_top10.append(black_sample(black_order[i][0], black_order[i][1]))
+    print(black_top10)
+    
+
+
     return render(request, "result_show/show_HAE.html", {'subject_list': contacts,
                                                      'page_range':pageRange, 
                                                      'num_black':num_black,
                                                      'num_white':num_white,
                                                      'now':page,
+                                                     'black_top':black_top10,
     })
     

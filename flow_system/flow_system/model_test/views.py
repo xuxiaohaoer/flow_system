@@ -48,7 +48,6 @@ def test_HAE(request):
                "f5_w":flow_packet_white,
                "f6_b":ack_black,
                "f6_w":ack_white}
-    print(context)
     return render(request, 'model_test/test_HAE.html', context)
 
 def test_MT(request):

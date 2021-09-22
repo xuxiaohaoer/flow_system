@@ -87,7 +87,7 @@ def MT_test(data_seed=0):
     #         t.save()
     for i in range(len(preds)):
         from model_test.models import ImageRes
-        name = ip_ports[i][0] + '-'+ str(ip_ports[i][1])+ '->' + ip_ports[i][2] + '-' + str(ip_ports[i][3])
+        name = ip_ports[i][0] + '-'+ str(int(ip_ports[i][1]))+ '->' + ip_ports[i][2] + '-' + str(int(ip_ports[i][3]))
         result = "white" if preds[i] else "black"
         t = ImageRes(name = name, result =result)
         t.save()
