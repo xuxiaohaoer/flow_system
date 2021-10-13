@@ -129,7 +129,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 flow_system/flow_system/model_save/mix_mult_bilstm/
-flow_system/flow_system/data_feature/HAE
+flow_system/flow_system/data_feature/HAE/test_data.npy
+flow_system/flow_system/data_feature/HAE/train_data.npy
 
 data_cut/
 data_raw/
