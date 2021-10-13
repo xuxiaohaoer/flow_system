@@ -88,13 +88,17 @@
                     
                 </div>
                  <div>
-                    <div id="main" style="width:40%;height:600px;float:left"></div>
-                    <nav style="width:60%;float:left">
+                    <div id="main" style="width:50%;height:500px;float:left"></div>
+                    <div id="main2" style="width:50%;height:500px;float:left"></div>
+                    <div style="margin-left:200px">
                         <table class="table table-hover" style="width:800px;font-size:20px">
+                            <caption>
+                            攻击流量样本
+                            </capiton>
                             <thead>
                                 <tr>
                                     <th>name</th>
-                                    <th>label</th>
+                                    <th>result</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -120,13 +124,14 @@
                                 {% if page_num == subject_list.number %}
                                     <li class="active">
                                         <a href="#">
-                                            <b>{{ page_num }}</b>
+                                        <b>{{ page_num }}</b>
                                         </a>
                                         <span>&nbsp&nbsp</span>
                                     </li>
                                 {%else%}
                                     <li>
-                                        <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                        <a href="?page={{ page_num }}">{{ page_num }}
+                                        </a>
                                         <span>&nbsp&nbsp</span>
                                     </li>
                                 {% endif %}
@@ -139,7 +144,7 @@
                             </li>
                             {% endif %}
                         </ul>
-                    </nav>
+                    </div>
                 </div>  
             </div>
         </section>
@@ -208,7 +213,58 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
     </script>
-    
+    <script>
+        var chartDom = document.getElementById('main2');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+            name: 'Access From',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                show: true,
+                fontSize: '40',
+                fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                { value: {{black_1.num}}, name: '192.168.216.34'},
+                { value: {{black_2.num}}, name: '192.168.95.9' },
+                { value: {{black_3.num}}, name: '192.168.201.17' },
+                { value: {{black_4.num}}, name: '192.168.248.73' },
+                { value: {{3332}}, name: 'other' }
+            ]
+            }
+        ]
+        };
+
+        option && myChart.setOption(option);
+
+    </script>
   </body>
 </html>
 

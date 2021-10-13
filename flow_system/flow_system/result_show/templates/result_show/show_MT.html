@@ -86,13 +86,35 @@
                     </div> 
                 </div>
                 <div>
-                    <div id="main" style="width:40%;height:600px;float:left"></div>
+                    <div id="main" style="width:40%;height:500px;float:left"></div>
                     <nav style="width:60%;float:left">
+                        <table class="table table-striped" style="width:800px;font-size:20px">
+                            <caption>ip存在风险</caption>
+                            <thead>
+                                <tr>
+                                    <th>ip</th>
+                                    <th>num</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            {%for black in black_top%}
+                                <tr >
+                                    <td class="text-left" style="font-size:20px"><font color="red">{{black.ip}}</font></td>
+                                    <td class="text-left" style="font-size:20px">{{black.num}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </nav>
+                    <div style="margin-left:200px">
                         <table class="table table-hover" style="width:800px;font-size:20px">
+                            <caption>
+                            恶意流量样本
+                            </capiton>
                             <thead>
                                 <tr>
                                     <th>name</th>
-                                    <th>label</th>
+                                    <th>result</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -118,13 +140,14 @@
                                 {% if page_num == subject_list.number %}
                                     <li class="active">
                                         <a href="#">
-                                            <b>{{ page_num }}</b>
+                                        <b>{{ page_num }}</b>
                                         </a>
                                         <span>&nbsp&nbsp</span>
                                     </li>
                                 {%else%}
                                     <li>
-                                        <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                        <a href="?page={{ page_num }}">{{ page_num }}
+                                        </a>
                                         <span>&nbsp&nbsp</span>
                                     </li>
                                 {% endif %}
@@ -137,12 +160,12 @@
                             </li>
                             {% endif %}
                         </ul>
-                    </nav>
-                </div>  
+                    </div>
+                </div>   
             </div>
         </section>
        
-        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"><a href="../">返回</a></h2>
+        <h2 class="section-title wow fadeInDown animated" data-wow-delay="0.5s"> <a href="../" class="btn btn-lg btn-common animated fadeInUp"><nav style="font-size:40px">返回</nav></a></h2>
     <!-- Services Section End -->
     <!-- Portfolio Section -->
     

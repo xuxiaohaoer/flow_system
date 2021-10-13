@@ -102,8 +102,8 @@ def HAE_test():
 
     from model_test.models import FlowRes
     for i in range(len(pre_data)):
-        name = test_ip_port[i][0] + '-' + str(test_ip_port[i][1]) + '->' + test_ip_port[i][2] + '-' + str(
-            test_ip_port[i][3])
+        name = test_ip_port[i][0] + '-' + str(int(test_ip_port[i][1])) + '->' + test_ip_port[i][2] + '-' + str(int(
+            test_ip_port[i][3]))
         result = "abnormal" if pre_data[i] else "normal"
         t = FlowRes(name=name, result=result)
         t.save()
