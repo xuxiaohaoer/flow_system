@@ -25,7 +25,7 @@
 * `model_save/`存放WVM训练好模型
 * `modelSaved/`存放VMT和HAE训练好模型
 ## Settings
-* `flow_system`
+* `flow_system/settings`中，`DATABASES`设置数据库账号与密码，默认数据库为mysql
 ## Use
 * `python manage.py migrate flow_cut`建立数据库标项
 * `python manage.py migrate flow_collect`建立数据库标项
