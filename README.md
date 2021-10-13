@@ -1,23 +1,40 @@
 # flow_system(施工👷‍♀️👷)
 流量检测模型系统
 ## Folders(flow_system)
-* `data_cut/`
-* `data_raw/`
-* `feature_extract/`
-* `flow_cut/`
-* `flow_collect/`
-* `model_train/`
-* `model_test/`
-* `result_show/`
-* `home`
-* `requirement.txt`
-* `manage.py`
+* `data_cut/`存放按照五元组切割后的流量样本
+* `data_raw/`存放流量收集来的原始样本
+* `feature_extract/`存放特征提取后的训练和测试样本
+* `flow_cut/`按照五元组切割流量样本模块
+* `flow_collect/`采集流量模块
+* `model_train/`模型训练模块
+* `model_test/`模型测试模块
+* `result_show/`结果展示模块
+* `flow_system/`配置模块
+* `home`主页模块
+* `requirement.txt`配置要求
+* `manage.py`django主要运行程序
 ## Data
-* `data_raw`
-* `data_cut`
-* `feature_extract/`
+* `data_raw`存放流量收集来的原始样本
+* `data_cut`存放按照五元组切割后的流量样本，其中`flow/`存放普通流量,`tls/`存放加密流量
+* `feature_extract/`存放特征提取后的特征，其中`image/`存放图片特征,`flow/`存放流级特征,`tls/`存放加密特征
+## Model
+* VMT
+* HAE
+* WVM
+## Model_save
+* `model_save/`存放WVM训练好模型
+* `modelSaved/`存放VMT和HAE训练好模型
+## Settings
+* `flow_system`
 ## Use
-* `python manage.py migrate flow_cut`
-* `python manage.py migrate flow_collect`
+* `python manage.py migrate flow_cut`建立数据库标项
+* `python manage.py migrate flow_collect`建立数据库标项
+* `python manage.py migrate feature_extract`建立数据库标项
+* `python manage.py migrate model_test`建立数据库标项
+* `python manage.py makemigrations`保存数据库变动
+* `python manage.py runserver`运行本地服务器
 ## Contribuiter
-## Ohter
+@xuxiaohaoer
+@sunny778889
+@ASUIDH
+## Other
