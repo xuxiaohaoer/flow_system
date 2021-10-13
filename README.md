@@ -33,7 +33,7 @@
 * `python manage.py migrate model_test`建立数据库标项
 * `python manage.py makemigrations`保存数据库变动
 * `python manage.py runserver`运行本地服务器
-## Contribuiter
+## Contributors
 @xuxiaohaoer
 @sunny778889
 @ASUIDH
