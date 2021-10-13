@@ -16,7 +16,7 @@
 ## Data
 * `data_raw`存放流量收集来的原始样本
 * `data_cut`存放按照五元组切割后的流量样本，其中`flow/`存放普通流量,`tls/`存放加密流量
-* `feature_extract/`存放特征提取后的特征，其中`image/`存放图片特征,`flow/`存放流级特征,`tls/`存放加密特征，请将`feature_extract`后的特征集以`train_black.npy`,`test_black.npy`这种形式保存
+* `feature_extract/`存放特征提取后的特征，其中`image/`存放图片特征,`flow/`存放流级特征,`tls/`存放加密特征，详细命名规则请看每个文件夹中的readme.txt
 ## Model
 * VMT
 * HAE
