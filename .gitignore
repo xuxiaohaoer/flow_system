@@ -132,7 +132,8 @@ flow_system/flow_system/model_save/mix_mult_bilstm/
 flow_system/flow_system/data_feature/HAE/test_data.npy
 flow_system/flow_system/data_feature/HAE/train_data.npy
 
-data_cut/
-data_raw/
+data_cut/flow/
+data_cut/tls/
+
 flow_system/flow_system/flow_system/settings.py
 flow_system/flow_collect/views.py
