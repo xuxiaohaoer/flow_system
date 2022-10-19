@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'model_test',
     'model_train',
     'result_show',
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
