@@ -135,9 +135,9 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 15000000
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 # STATIC_DIRS=[
 #     os.path.join(BASE_DIR, 'static'),
 # ]
