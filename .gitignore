@@ -137,3 +137,6 @@ data_cut/tls/
 
 flow_system/flow_system/flow_system/settings.py
 flow_system/flow_collect/views.py
+
+data_raw/
+flow_system/flow_system/data_cut/flow/

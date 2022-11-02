@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/static/home/css/extras.css">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="/static/home/css/responsive.css">
-    <script src="/static/echarts.min_1.js"></script>
+    <script src="/static/echarts.min.js"></script>
   </head>
   <body>
 
@@ -138,60 +138,60 @@
     <script src="/static/home/js/contact-form-script.js"></script>
     <script src="/static/home/js/main.js"></script>
     <script>
-    var chartDom = document.getElementById('main');
-var myChart = echarts.init(chartDom);
-var option;
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
 
-option = {
-    series: [{
-        type: 'gauge',
-        progress: {
-            show: true,
-            width: 18
-        },
-        axisLine: {
-            lineStyle: {
-                width: 18
-            }
-        },
-        axisTick: {
-            show: false
-        },
-        splitLine: {
-            length: 15,
-            lineStyle: {
-                width: 2,
-                color: '#999'
-            }
-        },
-        axisLabel: {
-            distance: 25,
-            color: '#999',
-            fontSize: 20
-        },
-        anchor: {
-            show: true,
-            showAbove: true,
-            size: 25,
-            itemStyle: {
-                borderWidth: 10
-            }
-        },
-        title: {
-            show: false
-        },
-        detail: {
-            valueAnimation: true,
-            fontSize: 80,
-            offsetCenter: [0, '70%']
-        },
-        data: [{
-            value: 100
-        }]
-    }]
-};
+      option = {
+          series: [{
+              type: 'gauge',
+              progress: {
+                  show: true,
+                  width: 18
+              },
+              axisLine: {
+                  lineStyle: {
+                      width: 18
+                  }
+              },
+              axisTick: {
+                  show: false
+              },
+              splitLine: {
+                  length: 15,
+                  lineStyle: {
+                      width: 2,
+                      color: '#999'
+                  }
+              },
+              axisLabel: {
+                  distance: 25,
+                  color: '#999',
+                  fontSize: 20
+              },
+              anchor: {
+                  show: true,
+                  showAbove: true,
+                  size: 25,
+                  itemStyle: {
+                      borderWidth: 10
+                  }
+              },
+              title: {
+                  show: false
+              },
+              detail: {
+                  valueAnimation: true,
+                  fontSize: 80,
+                  offsetCenter: [0, '70%']
+              },
+              data: [{
+                  value: 100
+              }]
+          }]
+      };
 
-option && myChart.setOption(option);
+      option && myChart.setOption(option);
 
     </script>
   </body>

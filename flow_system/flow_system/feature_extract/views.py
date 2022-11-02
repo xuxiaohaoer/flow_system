@@ -26,7 +26,7 @@ def feature_extract_flow(request):
     f =[]
     f.append(f_1.tolist())
     f.append(f_2.tolist())
-    return render(request, 'feature_extract/extract_flow.html', {"f_spot":f_spot.tolist(),
+    return render(request, 'f_extract/extract_flow.html', {"f_spot":f_spot.tolist(),
                                                                  "f":f})
 
 

@@ -736,7 +736,7 @@
                         <img src="static/picture/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="form-check form-switch mb-5">
-                        <input type="checkbox" class="form-check-input theme-choice" id="rtl-mode-switch" data-appstyle="assets/css/app-rtl.min.css">
+                        <input type="checkbox" class="form-check-input theme-choice" id="rtl-mode-switch" data-appstyle="static/assets/css/app-rtl.min.css">
                         <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
                     </div>
 
@@ -770,6 +770,30 @@
         <!-- Calendar init -->
         <script src="static/js/calendar.init.js"></script>
         <script src="static/js/app.js"></script>
-
+        <script>
+            var chartDom = document.getElementById('main');
+            var myChart = echarts.init(chartDom);
+            var option;
+        
+            option = {
+                xAxis: {
+                    scale: true
+                },
+                yAxis: {
+                    scale: true
+                },
+                series: [{
+                    type: 'effectScatter',
+                    symbolSize: 20,
+                    data: {{f}},
+                }, {
+                    type: 'scatter',
+                    data: {{f_spot}},
+                }]
+            };
+        
+            option && myChart.setOption(option);
+        
+            </script>
     </body>
 </html>
