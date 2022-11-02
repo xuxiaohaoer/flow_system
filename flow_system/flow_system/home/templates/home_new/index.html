@@ -17,7 +17,7 @@
         <link href="static/css/icons.min.css" rel="stylesheet" type="text/css">
         <!-- App Css-->
         <link href="static/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
-
+        <script src="/static/echarts.min.js"></script>
     </head>
 
     
@@ -147,7 +147,7 @@
                         <div class="dropdown d-inline-block ms-1">
                             <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ti-bell"></i>
-                                <span class="badge bg-danger rounded-pill">3</span>
+                                <span class="badge bg-danger rounded-pill">2</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
                                 <div class="p-3">
@@ -249,13 +249,13 @@
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="static/picture/user-4.jpg" alt="Header Avatar">
+                                <img class="rounded-circle header-profile-user" src="static/picture/logo-new.png" alt="Header Avatar">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="pages-lock-screen.html"><i class="mdi mdi-lock-open-outline font-size-17 text-muted align-middle me-1"></i> Lock screen</a>
+                                
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="pages-login.html"><i class="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item text-danger" href="login"><i class="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"></i> Logout</a>
                             </div>
                         </div>
             
@@ -288,29 +288,33 @@
                                 <a href="" class="waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span class="badge rounded-pill bg-primary float-end">2</span>
-                                    <span>Dashboard</span>
+                                    <span>结果展示</span>
                                 </a>
                             </li>
-
                             <li>
-                                <a href="result_show/tls" class=" waves-effect">
+                                <a href="flow_collect/" class="waves-effect">
+                                    <i class="mdi mdi-chart-line"></i>
+                                    <span>采集流量</span>
+                                </a>
+                            </l>
+                            <li>
+                                <a href="flow_cut/" class="waves-effect">
+                                    <i class="mdi mdi-album"></i>
+                                    <span>流量划分</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="feature_extract/flow" class=" waves-effect">
                                     <i class="mdi mdi-calendar-check"></i>
-                                    <span>Calendar</span>
+                                    <span>特征提取</span>
                                 </a>
                             </li>
-
                             <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="mdi mdi-email-outline"></i>
-                                    <span>Email</span>
+                                <a href="/admin" class="waves-effect">
+                                    <i class="mdi mdi-responsive"></i>
+                                    <span> 后台管理系统</span>
                                 </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="email-inbox.html">Inbox</a></li>
-                                    <li><a href="email-read.html">Email Read</a></li>
-                                    <li><a href="email-compose.html">Email Compose</a></li>
-                                </ul>
                             </li>
-
                             {% comment %} <li class="menu-title">Components</li>
 
                             <li>
@@ -524,11 +528,11 @@
                                 <div class="state-information d-none d-sm-block">
                                     <div class="state-graph">
                                         <div id="header-chart-1"></div>
-                                        <div class="info">Balance $ 2,317</div>
+                                        {% comment %} <div class="info">Balance $ 2,317</div> {% endcomment %}
                                     </div>
                                     <div class="state-graph">
                                         <div id="header-chart-2"></div>
-                                        <div class="info">Item Sold 1230</div>
+                                        {% comment %} <div class="info">Item Sold 1230</div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
@@ -557,8 +561,8 @@
                                             <i class="mdi mdi-buffer float-end"></i>
                                         </div>
                                         <div class="text-white">
-                                            <h6 class="text-uppercase mb-3 font-size-16 text-white">FLOWS</h6>
-                                            <h2 class="mb-4 text-white">46,782</h2>
+                                            <h6 class="text-uppercase mb-3 font-size-16 text-white">FLOW</h6>
+                                            <h2 class="mb-4 text-white">{{num_tot}}</h2>
                                             <span class="badge bg-danger"> -29% </span> <span class="ms-2">From previous period</span>
                                         </div>
                                     </div>
@@ -572,7 +576,7 @@
                                         </div>
                                         <div class="text-white">
                                             <h6 class="text-uppercase mb-3 font-size-16 text-white">Attack</h6>
-                                            <h2 class="mb-4 text-white">15412</h2>
+                                            <h2 class="mb-4 text-white">{{num_black}}</h2>
                                             <span class="badge bg-warning"> 0% </span> <span class="ms-2">From previous period</span>
                                         </div>
                                     </div>
@@ -586,7 +590,7 @@
                                         </div>
                                         <div class="text-white">
                                             <h6 class="text-uppercase mb-3 font-size-16 text-white">Normal</h6>
-                                            <h2 class="mb-4 text-white">18900</h2>
+                                            <h2 class="mb-4 text-white">{{num_white}}</h2>
                                             <span class="badge bg-info"> +89% </span> <span class="ms-2">From previous period</span>
                                         </div>
                                     </div>
@@ -597,23 +601,24 @@
 
                         <div class="row">
 
-                            <div class="col-xl-3">
+                            <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Monthly Earnings</h4>
+                                        <h4 class="card-title mb-4">检测结果</h4>
 
                                         <div class="row text-center mt-4">
                                             <div class="col-6">
-                                                <h5 class="font-size-20">$56241</h5>
-                                                <p class="text-muted">Marketplace</p>
+                                                <h5 class="font-size-20">{{num_black}}</h5>
+                                                <p class="text-muted">Attack Flow</p>
                                             </div>
                                             <div class="col-6">
-                                                <h5 class="font-size-20">$23651</h5>
-                                                <p class="text-muted">Total Income</p>
+                                                <h5 class="font-size-20">{{num_tot}}</h5>
+                                                <p class="text-muted">Total Flow</p>
                                             </div>
                                         </div>
-
-                                        <div id="morris-donut-example" class="morris-charts morris-charts-height" dir="ltr"></div>
+                                    
+                                        <div id="main" style="width:500px;height:400px;float:left"></div>
+                                        {% comment %} <div id="morris-donut-example" class="morris-charts morris-charts-height" dir="ltr"></div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
@@ -621,322 +626,35 @@
                             <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Email Sent</h4>
-
+                                        <h4 class="card-title mb-4">ip地址</h4>
                                         <div class="row text-center mt-4">
-                                            <div class="col-4">
-                                                <h5 class="font-size-20">$ 89425</h5>
-                                                <p class="text-muted">Marketplace</p>
+                                            <div class="col-6">
+                                                <h5 class="font-size-20">20</h5>
+                                                <p class="text-muted">Attack Ip</p>
                                             </div>
-                                            <div class="col-4">
-                                                <h5 class="font-size-20">$ 56210</h5>
-                                                <p class="text-muted">Total Income</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <h5 class="font-size-20">$ 8974</h5>
-                                                <p class="text-muted">Last Month</p>
+                                            <div class="col-6">
+                                                <h5 class="font-size-20">50</h5>
+                                                <p class="text-muted">Total Ip</p>
                                             </div>
                                         </div>
-
-                                        <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div>
+                                        
+                                        <div id="main2" style="width:500px;height:400px;float:left"></div>
+                                        {% comment %} <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Monthly Earnings</h4>
 
-                                        <div class="row text-center mt-4">
-                                            <div class="col-6">
-                                                <h5 class="font-size-20">$ 2548</h5>
-                                                <p class="text-muted">Marketplace</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="font-size-20">$ 6985</h5>
-                                                <p class="text-muted">Total Income</p>
-                                            </div>
-                                        </div>
-
-                                        <div id="morris-bar-stacked" class="morris-charts morris-charts-height" dir="ltr"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                         </div>
+                        <div id="main3" style="width:1000px;height:4000px;"></div>
                         <!-- end row -->
 
-                        <div class="row">
-
-                            
-                            <div class="col-xl-4 col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Recent Attacks Feed</h4>
-
-                                        <ol class="activity-feed mb-0">
-                                            <li class="feed-item">
-                                                <div class="feed-item-list">
-                                                    <span class="date">Jun 25</span>
-                                                    <span class="activity-text">Responded to need “Volunteer Activities”</span>
-                                                </div>
-                                            </li>
-                                            <li class="feed-item">
-                                                <div class="feed-item-list">
-                                                    <span class="date">Jun 24</span>
-                                                    <span class="activity-text">Added an interest “Volunteer Activities”</span>
-                                                </div>
-                                            </li>
-                                            <li class="feed-item">
-                                                <div class="feed-item-list">
-                                                    <span class="date">Jun 23</span>
-                                                    <span class="activity-text">Joined the group “Boardsmanship Forum”</span>
-                                                </div>
-                                            </li>
-                                            <li class="feed-item">
-                                                <div class="feed-item-list">
-                                                    <span class="date">Jun 21</span>
-                                                    <span class="activity-text">Responded to need “In-Kind Opportunity”</span>
-                                                </div>
-                                            </li>
-                                        </ol>
-
-                                        <div class="text-center">
-                                            <a href="#" class="btn btn-sm btn-primary">Load More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
-                        </div>
+                        
                         <!-- end row -->
                         
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Latest Transactions</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table align-middle table-centered table-vertical table-nowrap">
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="static/picture/user-2.jpg" alt="user-image" class="avatar-xs rounded-circle me-2"> Herbert C. Patton
-                                                        </td>
-                                                        <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>
-                                                        <td>
-                                                            $14,584
-                                                            <p class="m-0 text-muted font-14">Amount</p>
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                            <p class="m-0 text-muted font-14">Date</p>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="static/picture/user-3.jpg" alt="user-image" class="avatar-xs rounded-circle me-2"> Mathias N. Klausen
-                                                        </td>
-                                                        <td><i class="mdi mdi-checkbox-blank-circle text-warning"></i> Waiting payment</td>
-                                                        <td>
-                                                            $8,541
-                                                            <p class="m-0 text-muted font-14">Amount</p>
-                                                        </td>
-                                                        <td>
-                                                            10/11/2016
-                                                            <p class="m-0 text-muted font-14">Date</p>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="static/picture/user-4.jpg" alt="user-image" class="avatar-xs rounded-circle me-2"> Nikolaj S. Henriksen
-                                                        </td>
-                                                        <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>
-                                                        <td>
-                                                            $954
-                                                            <p class="m-0 text-muted font-14">Amount</p>
-                                                        </td>
-                                                        <td>
-                                                            8/11/2016
-                                                            <p class="m-0 text-muted font-14">Date</p>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="static/picture/user-5.jpg" alt="user-image" class="avatar-xs rounded-circle me-2"> Lasse C. Overgaard
-                                                        </td>
-                                                        <td><i class="mdi mdi-checkbox-blank-circle text-danger"></i> Payment expired</td>
-                                                        <td>
-                                                            $44,584
-                                                            <p class="m-0 text-muted font-14">Amount</p>
-                                                        </td>
-                                                        <td>
-                                                            7/11/2016
-                                                            <p class="m-0 text-muted font-14">Date</p>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="static/picture/user-6.jpg" alt="user-image" class="avatar-xs rounded-circle me-2"> Kasper S. Jessen
-                                                        </td>
-                                                        <td><i class="mdi mdi-checkbox-blank-circle text-success"></i> Confirm</td>
-                                                        <td>
-                                                            $8,844
-                                                            <p class="m-0 text-muted font-14">Amount</p>
-                                                        </td>
-                                                        <td>
-                                                            1/11/2016
-                                                            <p class="m-0 text-muted font-14">Date</p>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Latest Orders</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table align-middle table-centered table-vertical table-nowrap mb-1">
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td>#12354781</td>
-                                                        <td>
-                                                            <img src="static/picture/user-1.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> Riverston Glass Chair
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-success">Delivered</span></td>
-                                                        <td>
-                                                            $185
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>#52140300</td>
-                                                        <td>
-                                                            <img src="static/picture/user-2.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> Shine Company Catalina
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-success">Delivered</span></td>
-                                                        <td>
-                                                            $1,024
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>#96254137</td>
-                                                        <td>
-                                                            <img src="static/picture/user-3.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> Trex Outdoor Furniture Cape
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-danger">Cancel</span></td>
-                                                        <td>
-                                                            $657
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>#12365474</td>
-                                                        <td>
-                                                            <img src="static/picture/user-4.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> Oasis Bathroom Teak Corner
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-warning">Shipped</span></td>
-                                                        <td>
-                                                            $8451
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>#85214796</td>
-                                                        <td>
-                                                            <img src="static/picture/user-5.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> BeoPlay Speaker
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-success">Delivered</span></td>
-                                                        <td>
-                                                            $584
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#12354781</td>
-                                                        <td>
-                                                            <img src="static/picture/user-6.jpg" alt="user-image" class="avatar-xs me-2 rounded-circle"> Riverston Glass Chair
-                                                        </td>
-                                                        <td><span class="badge rounded-pill bg-success">Delivered</span></td>
-                                                        <td>
-                                                            $185
-                                                        </td>
-                                                        <td>
-                                                            5/12/2016
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light">Edit</button>
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- end row -->
 
 
@@ -964,7 +682,7 @@
         <!-- END layout-wrapper -->
 
         <!-- Right Sidebar -->
-        <div class="right-bar">
+        {% comment %} <div class="right-bar">
             <div data-simplebar="" class="h-100">
 
                 <div class="rightbar-title d-flex align-items-center px-3 py-4">
@@ -1009,7 +727,7 @@
                 </div>
 
             </div> <!-- end slimscroll-menu-->
-        </div>
+        </div> {% endcomment %}
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
@@ -1030,7 +748,970 @@
         <script src="static/js/dashboard.init.js"></script>
 
         <script src="static/js/app.js"></script>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
 
+            // 指定图表的配置项和数据
+        var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        color:['#60BFDD', '#6658B0'],
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '25',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: {{num_white}}, name: '正常流量'},
+                    {value: {{num_black}}, name: '恶意流量'},
+                ]
+            }
+        ]
+    };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+    </script> 
+    <script>
+        var chartDom = document.getElementById('main2');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+            name: 'Access From',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                show: true,
+                fontSize: '40',
+                fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                { value: {{black_1.num}}, name: '192.168.216.34'},
+                { value: {{black_2.num}}, name: '192.168.95.9' },
+                { value: {{black_3.num}}, name: '192.168.201.17' },
+                { value: {{black_4.num}}, name: '192.168.248.73' },
+                { value: {{3332}}, name: 'other' }
+            ]
+            }
+        ]
+        };
+
+        option && myChart.setOption(option);
+
+    </script>
+    <script>
+        var app = {};
+
+var chartDom = document.getElementById('main3');
+var myChart = echarts.init(chartDom);
+var option;
+
+var data = [
+  {
+    name: 'Flora',
+    itemStyle: {
+      color: '#da0d68'
+    },
+    children: [
+      {
+        name: 'Black Tea',
+        value: 1,
+        itemStyle: {
+          color: '#975e6d'
+        }
+      },
+      {
+        name: 'Floral',
+        itemStyle: {
+          color: '#e0719c'
+        },
+        children: [
+          {
+            name: 'Chamomile',
+            value: 1,
+            itemStyle: {
+              color: '#f99e1c'
+            }
+          },
+          {
+            name: 'Rose',
+            value: 1,
+            itemStyle: {
+              color: '#ef5a78'
+            }
+          },
+          {
+            name: 'Jasmine',
+            value: 1,
+            itemStyle: {
+              color: '#f7f1bd'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Fruity',
+    itemStyle: {
+      color: '#da1d23'
+    },
+    children: [
+      {
+        name: 'Berry',
+        itemStyle: {
+          color: '#dd4c51'
+        },
+        children: [
+          {
+            name: 'Blackberry',
+            value: 1,
+            itemStyle: {
+              color: '#3e0317'
+            }
+          },
+          {
+            name: 'Raspberry',
+            value: 1,
+            itemStyle: {
+              color: '#e62969'
+            }
+          },
+          {
+            name: 'Blueberry',
+            value: 1,
+            itemStyle: {
+              color: '#6569b0'
+            }
+          },
+          {
+            name: 'Strawberry',
+            value: 1,
+            itemStyle: {
+              color: '#ef2d36'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Dried Fruit',
+        itemStyle: {
+          color: '#c94a44'
+        },
+        children: [
+          {
+            name: 'Raisin',
+            value: 1,
+            itemStyle: {
+              color: '#b53b54'
+            }
+          },
+          {
+            name: 'Prune',
+            value: 1,
+            itemStyle: {
+              color: '#a5446f'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Other Fruit',
+        itemStyle: {
+          color: '#dd4c51'
+        },
+        children: [
+          {
+            name: 'Coconut',
+            value: 1,
+            itemStyle: {
+              color: '#f2684b'
+            }
+          },
+          {
+            name: 'Cherry',
+            value: 1,
+            itemStyle: {
+              color: '#e73451'
+            }
+          },
+          {
+            name: 'Pomegranate',
+            value: 1,
+            itemStyle: {
+              color: '#e65656'
+            }
+          },
+          {
+            name: 'Pineapple',
+            value: 1,
+            itemStyle: {
+              color: '#f89a1c'
+            }
+          },
+          {
+            name: 'Grape',
+            value: 1,
+            itemStyle: {
+              color: '#aeb92c'
+            }
+          },
+          {
+            name: 'Apple',
+            value: 1,
+            itemStyle: {
+              color: '#4eb849'
+            }
+          },
+          {
+            name: 'Peach',
+            value: 1,
+            itemStyle: {
+              color: '#f68a5c'
+            }
+          },
+          {
+            name: 'Pear',
+            value: 1,
+            itemStyle: {
+              color: '#baa635'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Citrus Fruit',
+        itemStyle: {
+          color: '#f7a128'
+        },
+        children: [
+          {
+            name: 'Grapefruit',
+            value: 1,
+            itemStyle: {
+              color: '#f26355'
+            }
+          },
+          {
+            name: 'Orange',
+            value: 1,
+            itemStyle: {
+              color: '#e2631e'
+            }
+          },
+          {
+            name: 'Lemon',
+            value: 1,
+            itemStyle: {
+              color: '#fde404'
+            }
+          },
+          {
+            name: 'Lime',
+            value: 1,
+            itemStyle: {
+              color: '#7eb138'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Sour/\nFermented',
+    itemStyle: {
+      color: '#ebb40f'
+    },
+    children: [
+      {
+        name: 'Sour',
+        itemStyle: {
+          color: '#e1c315'
+        },
+        children: [
+          {
+            name: 'Sour Aromatics',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'Acetic Acid',
+            value: 1,
+            itemStyle: {
+              color: '#94a76f'
+            }
+          },
+          {
+            name: 'Butyric Acid',
+            value: 1,
+            itemStyle: {
+              color: '#d0b24f'
+            }
+          },
+          {
+            name: 'Isovaleric Acid',
+            value: 1,
+            itemStyle: {
+              color: '#8eb646'
+            }
+          },
+          {
+            name: 'Citric Acid',
+            value: 1,
+            itemStyle: {
+              color: '#faef07'
+            }
+          },
+          {
+            name: 'Malic Acid',
+            value: 1,
+            itemStyle: {
+              color: '#c1ba07'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Alcohol/\nFremented',
+        itemStyle: {
+          color: '#b09733'
+        },
+        children: [
+          {
+            name: 'Winey',
+            value: 1,
+            itemStyle: {
+              color: '#8f1c53'
+            }
+          },
+          {
+            name: 'Whiskey',
+            value: 1,
+            itemStyle: {
+              color: '#b34039'
+            }
+          },
+          {
+            name: 'Fremented',
+            value: 1,
+            itemStyle: {
+              color: '#ba9232'
+            }
+          },
+          {
+            name: 'Overripe',
+            value: 1,
+            itemStyle: {
+              color: '#8b6439'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Green/\nVegetative',
+    itemStyle: {
+      color: '#187a2f'
+    },
+    children: [
+      {
+        name: 'Olive Oil',
+        value: 1,
+        itemStyle: {
+          color: '#a2b029'
+        }
+      },
+      {
+        name: 'Raw',
+        value: 1,
+        itemStyle: {
+          color: '#718933'
+        }
+      },
+      {
+        name: 'Green/\nVegetative',
+        itemStyle: {
+          color: '#3aa255'
+        },
+        children: [
+          {
+            name: 'Under-ripe',
+            value: 1,
+            itemStyle: {
+              color: '#a2bb2b'
+            }
+          },
+          {
+            name: 'Peapod',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          },
+          {
+            name: 'Fresh',
+            value: 1,
+            itemStyle: {
+              color: '#03a653'
+            }
+          },
+          {
+            name: 'Dark Green',
+            value: 1,
+            itemStyle: {
+              color: '#038549'
+            }
+          },
+          {
+            name: 'Vegetative',
+            value: 1,
+            itemStyle: {
+              color: '#28b44b'
+            }
+          },
+          {
+            name: 'Hay-like',
+            value: 1,
+            itemStyle: {
+              color: '#a3a830'
+            }
+          },
+          {
+            name: 'Herb-like',
+            value: 1,
+            itemStyle: {
+              color: '#7ac141'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Beany',
+        value: 1,
+        itemStyle: {
+          color: '#5e9a80'
+        }
+      }
+    ]
+  },
+  {
+    name: 'Other',
+    itemStyle: {
+      color: '#0aa3b5'
+    },
+    children: [
+      {
+        name: 'Papery/Musty',
+        itemStyle: {
+          color: '#9db2b7'
+        },
+        children: [
+          {
+            name: 'Stale',
+            value: 1,
+            itemStyle: {
+              color: '#8b8c90'
+            }
+          },
+          {
+            name: 'Cardboard',
+            value: 1,
+            itemStyle: {
+              color: '#beb276'
+            }
+          },
+          {
+            name: 'Papery',
+            value: 1,
+            itemStyle: {
+              color: '#fefef4'
+            }
+          },
+          {
+            name: 'Woody',
+            value: 1,
+            itemStyle: {
+              color: '#744e03'
+            }
+          },
+          {
+            name: 'Moldy/Damp',
+            value: 1,
+            itemStyle: {
+              color: '#a3a36f'
+            }
+          },
+          {
+            name: 'Musty/Dusty',
+            value: 1,
+            itemStyle: {
+              color: '#c9b583'
+            }
+          },
+          {
+            name: 'Musty/Earthy',
+            value: 1,
+            itemStyle: {
+              color: '#978847'
+            }
+          },
+          {
+            name: 'Animalic',
+            value: 1,
+            itemStyle: {
+              color: '#9d977f'
+            }
+          },
+          {
+            name: 'Meaty Brothy',
+            value: 1,
+            itemStyle: {
+              color: '#cc7b6a'
+            }
+          },
+          {
+            name: 'Phenolic',
+            value: 1,
+            itemStyle: {
+              color: '#db646a'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Chemical',
+        itemStyle: {
+          color: '#76c0cb'
+        },
+        children: [
+          {
+            name: 'Bitter',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'Salty',
+            value: 1,
+            itemStyle: {
+              color: '#def2fd'
+            }
+          },
+          {
+            name: 'Medicinal',
+            value: 1,
+            itemStyle: {
+              color: '#7a9bae'
+            }
+          },
+          {
+            name: 'Petroleum',
+            value: 1,
+            itemStyle: {
+              color: '#039fb8'
+            }
+          },
+          {
+            name: 'Skunky',
+            value: 1,
+            itemStyle: {
+              color: '#5e777b'
+            }
+          },
+          {
+            name: 'Rubber',
+            value: 1,
+            itemStyle: {
+              color: '#120c0c'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Roasted',
+    itemStyle: {
+      color: '#c94930'
+    },
+    children: [
+      {
+        name: 'Pipe Tobacco',
+        value: 1,
+        itemStyle: {
+          color: '#caa465'
+        }
+      },
+      {
+        name: 'Tobacco',
+        value: 1,
+        itemStyle: {
+          color: '#dfbd7e'
+        }
+      },
+      {
+        name: 'Burnt',
+        itemStyle: {
+          color: '#be8663'
+        },
+        children: [
+          {
+            name: 'Acrid',
+            value: 1,
+            itemStyle: {
+              color: '#b9a449'
+            }
+          },
+          {
+            name: 'Ashy',
+            value: 1,
+            itemStyle: {
+              color: '#899893'
+            }
+          },
+          {
+            name: 'Smoky',
+            value: 1,
+            itemStyle: {
+              color: '#a1743b'
+            }
+          },
+          {
+            name: 'Brown, Roast',
+            value: 1,
+            itemStyle: {
+              color: '#894810'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Cereal',
+        itemStyle: {
+          color: '#ddaf61'
+        },
+        children: [
+          {
+            name: 'Grain',
+            value: 1,
+            itemStyle: {
+              color: '#b7906f'
+            }
+          },
+          {
+            name: 'Malt',
+            value: 1,
+            itemStyle: {
+              color: '#eb9d5f'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Spices',
+    itemStyle: {
+      color: '#ad213e'
+    },
+    children: [
+      {
+        name: 'Pungent',
+        value: 1,
+        itemStyle: {
+          color: '#794752'
+        }
+      },
+      {
+        name: 'Pepper',
+        value: 1,
+        itemStyle: {
+          color: '#cc3d41'
+        }
+      },
+      {
+        name: 'Brown Spice',
+        itemStyle: {
+          color: '#b14d57'
+        },
+        children: [
+          {
+            name: 'Anise',
+            value: 1,
+            itemStyle: {
+              color: '#c78936'
+            }
+          },
+          {
+            name: 'Nutmeg',
+            value: 1,
+            itemStyle: {
+              color: '#8c292c'
+            }
+          },
+          {
+            name: 'Cinnamon',
+            value: 1,
+            itemStyle: {
+              color: '#e5762e'
+            }
+          },
+          {
+            name: 'Clove',
+            value: 1,
+            itemStyle: {
+              color: '#a16c5a'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Nutty/\nCocoa',
+    itemStyle: {
+      color: '#a87b64'
+    },
+    children: [
+      {
+        name: 'Nutty',
+        itemStyle: {
+          color: '#c78869'
+        },
+        children: [
+          {
+            name: 'Peanuts',
+            value: 1,
+            itemStyle: {
+              color: '#d4ad12'
+            }
+          },
+          {
+            name: 'Hazelnut',
+            value: 1,
+            itemStyle: {
+              color: '#9d5433'
+            }
+          },
+          {
+            name: 'Almond',
+            value: 1,
+            itemStyle: {
+              color: '#c89f83'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Cocoa',
+        itemStyle: {
+          color: '#bb764c'
+        },
+        children: [
+          {
+            name: 'Chocolate',
+            value: 1,
+            itemStyle: {
+              color: '#692a19'
+            }
+          },
+          {
+            name: 'Dark Chocolate',
+            value: 1,
+            itemStyle: {
+              color: '#470604'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Sweet',
+    itemStyle: {
+      color: '#e65832'
+    },
+    children: [
+      {
+        name: 'Brown Sugar',
+        itemStyle: {
+          color: '#d45a59'
+        },
+        children: [
+          {
+            name: 'Molasses',
+            value: 1,
+            itemStyle: {
+              color: '#310d0f'
+            }
+          },
+          {
+            name: 'Maple Syrup',
+            value: 1,
+            itemStyle: {
+              color: '#ae341f'
+            }
+          },
+          {
+            name: 'Caramelized',
+            value: 1,
+            itemStyle: {
+              color: '#d78823'
+            }
+          },
+          {
+            name: 'Honey',
+            value: 1,
+            itemStyle: {
+              color: '#da5c1f'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Vanilla',
+        value: 1,
+        itemStyle: {
+          color: '#f89a80'
+        }
+      },
+      {
+        name: 'Vanillin',
+        value: 1,
+        itemStyle: {
+          color: '#f37674'
+        }
+      },
+      {
+        name: 'Overall Sweet',
+        value: 1,
+        itemStyle: {
+          color: '#e75b68'
+        }
+      },
+      {
+        name: 'Sweet Aromatics',
+        value: 1,
+        itemStyle: {
+          color: '#d0545f'
+        }
+      }
+    ]
+  }
+];
+option = {
+  title: {
+    text: 'WORLD COFFEE RESEARCH SENSORY LEXICON',
+    textStyle: {
+      fontSize: 14,
+      align: 'center'
+    },
+    subtextStyle: {
+      align: 'center'
+    },
+    sublink: 'https://worldcoffeeresearch.org/work/sensory-lexicon/'
+  },
+  series: {
+    type: 'sunburst',
+    data: data,
+    radius: [0, '95%'],
+    sort: undefined,
+    emphasis: {
+      focus: 'ancestor'
+    },
+    levels: [
+      {},
+      {
+        r0: '15%',
+        r: '35%',
+        itemStyle: {
+          borderWidth: 2
+        },
+        label: {
+          rotate: 'tangential'
+        }
+      },
+      {
+        r0: '35%',
+        r: '70%',
+        label: {
+          align: 'right'
+        }
+      },
+      {
+        r0: '70%',
+        r: '72%',
+        label: {
+          position: 'outside',
+          padding: 3,
+          silent: false
+        },
+        itemStyle: {
+          borderWidth: 3
+        }
+      }
+    ]
+  }
+};
+
+option && myChart.setOption(option);     
+
+    </script>
     </body>
 
 </html>
