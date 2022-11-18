@@ -7,7 +7,7 @@ import pandas as pd
 def test_tls(request):
     DS_test()
 
-    return render(request, 'model_test/test_tls.html')
+    return render(request, 'model_test/test.html')
 
 # Create your views here.
 def test_HAE(request):

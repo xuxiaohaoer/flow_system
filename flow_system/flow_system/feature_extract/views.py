@@ -1,12 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from feature_extract.tls.feature_extract import pre_flow
 from feature_extract.flow.feature_extract import pre_flow_flow
 from feature_extract.image.feature_extract import pre_flow_image
+from feature_extract.tls.f_e import pre_flow
 import os
+import argparse
 # Create your views here.
 def feature_extract_tls(request):
-    pre_flow("./data_cut/tls/", './data_feature/tls/show.npy', 'test')
+    print("begin")
+    parse = argparse.ArgumentParser()
+    parse.add_argument("--d", type=str, default="normal", help="dataset")
+    parse.add_argument("--f", type=str, default="mix_word_seq", help="feature_type")
+    parse.add_argument("--s", type=bool, default=True, help="save or not")
+    parse.add_argument("--m", type=str, default="datacon", help="dataset model")
+    parse.add_argument("--l", type=int, default=95, help="word_num")
+    parse.add_argument("--ip", type=bool, default=True)
+    parse.add_argument("--tcp", type=bool, default=True)
+    parse.add_argument("--app", type=bool, default=False)
+
+    args = parse.parse_args()
+    # pre_flow(testdir + "data_train/", '{}/train_packet_fre.npy'.format(path), '0')
+    
+    pre_flow(args)
+    # pre_flow("./data_cut/tls/", './data_feature/tls/show.npy', 'test')
     return render(request, 'feature_extract/extract_tls.html')
 
 
@@ -26,7 +42,21 @@ def feature_extract_flow(request):
     f =[]
     f.append(f_1.tolist())
     f.append(f_2.tolist())
-    pre_flow("./data_cut/tls/", './data_feature/tls/show.npy', 'test')
+    
+    class args(object):
+        def __init__(self):
+            self.f = "mix_word_seq" 
+            self.s = True
+            self.l = 95
+            self.ip = True
+            self.tcp = True
+            self.app = True
+    arg = args()
+
+    print(arg)
+    # pre_flow(testdir + "data_train/", '{}/train_packet_fre.npy'.format(path), '0')
+    
+    pre_flow(arg)
     return render(request, 'f_extract/extract_flow.html', {"f_spot":f_spot.tolist(),
                                                                  "f":f})
 

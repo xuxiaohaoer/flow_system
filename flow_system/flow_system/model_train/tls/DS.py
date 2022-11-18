@@ -22,6 +22,7 @@ from .model.textcnn import text_cnn
 from .model.mult_bilstm import mult_bilstm
 from .model.cnn import CNN
 from .model.cnn_1d import cnn_1d
+from .model.mix_mult_bilstm import mix_mult_bilstm
 import time
 
 
@@ -31,14 +32,32 @@ from tqdm import tqdm
 import os
 class DS():
   
-    def __init__(self, model_use, feature_type, hidden_num, batch_size, length, dir):
+    def __init__(self, model_use, feature_type, hidden_num, batch_size, length, dir, mode):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.batch_size = batch_size
         self.model_use = model_use
+        mode = 'test'
+        if mode == "train":
+            self.dataloaders_dict, self.dataset_sizes, self.y_name = pre_dataset(batch_size, feature_type, length, dir)
+        else:
+            dataset_raw = np.load("./data_feature/tls/show.npy", allow_pickle=True)
+            dataset, self.y_name, label  = [], [], []
+            for (i, key) in enumerate(dataset_raw):
+                dataset.append(key["feature"])
+                self.y_name.append(key["name"])
+                label.append(0)
+            print("dataset:", len(dataset))
+            print("len", len(label))
+            x = torch.tensor(dataset)
+            y = torch.tensor(label)
+            self.dataloaders_dict = {
+                'test': Data.DataLoader(Data.TensorDataset(x, y), batch_size=batch_size, shuffle=False, num_workers=4)
+                }
+            self.dataset_sizes = {'test': len(x)}
 
-        self.dataloaders_dict, self.dataset_sizes, self.y_name = pre_dataset(batch_size, feature_type, length, dir)
-        word_num =  self.dataloaders_dict["train"].dataset.tensors[0].shape[1]
+        word_num = self.dataloaders_dict["test"].dataset.tensors[0].shape[1]
         word_len = self.dataloaders_dict["test"].dataset.tensors[0].shape[2]
+
 
         print("model:", model_use)
         print("word_num:", word_num, "word_len:", word_len)
@@ -62,6 +81,8 @@ class DS():
             self.model = CNN().to(device)
         elif model_use =='1d_cnn':
             self.model = cnn_1d(word_num, word_len, out_size = 5).to(device)
+        elif model_use == 'mix_mult_bilstm':
+            self.model = mix_mult_bilstm(word_len_1 = 63, word_len_2 = 30, hidden_num=144, num_heads=1, num_layers=1).to(device)
         self.Loss = nn.CrossEntropyLoss()
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.0001)
         self.best_model_wts = copy.deepcopy(self.model.state_dict())
@@ -179,7 +200,7 @@ def train():
     batch_size = 32
     length = 25
     feature_dir = "f_data_standard"
-    system = DS(model_use = model_use, feature_type = feature_type, hidden_num = hidden_num, batch_size = batch_size, length = length, dir = feature_dir)
+    system = DS(model_use = model_use, feature_type = feature_type, hidden_num = hidden_num, batch_size = batch_size, length = length, dir = feature_dir, mode="train")
     base_dir = "./model_save/"
     experiment = feature_type + '_' + model_use
     dir = base_dir + experiment
@@ -204,15 +225,15 @@ def train():
     f.close()
 
 def test():
-    model_use = "mult_bilstm"
+    model_use = "mix_mult_bilstm"
     feature_type = "mix"
     hidden_num = 144
     batch_size = 32
     length = 25
     feature_dir = "f_data_standard"
-    system = DS(model_use = model_use, feature_type = feature_type, hidden_num = hidden_num, batch_size = batch_size, length = length, dir = feature_dir)
+    system = DS(model_use = model_use, feature_type = feature_type, hidden_num = hidden_num, batch_size = batch_size, length = length, dir = feature_dir, mode="test")
     # system.test_model('load', "./model_save/mix_mult_bilstm/Thu Sep  2 03:24:33 2021.pth")
-    system.test_model('load', "./model_save/mix_mult_bilstm/Wed Jul 21 15:51:29 2021.pth")
+    system.test_model('load', "./model_save/mix_mult_bilstm/Wed Aug 24 23:39:56 2022.pth")
 
 
 if __name__ == '__main__':

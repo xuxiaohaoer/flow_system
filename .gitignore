@@ -140,3 +140,5 @@ flow_system/flow_collect/views.py
 
 data_raw/
 flow_system/flow_system/data_cut/flow/
+
+flow_system/flow_system/data_cut

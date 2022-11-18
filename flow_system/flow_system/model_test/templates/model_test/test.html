@@ -1,0 +1,697 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>加密流量检测系统</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+        <meta content="Themesbrand" name="author">
+
+        <!-- Bootstrap Css -->
+        <link href="static/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+        <!-- Icons Css -->
+        <link href="static/css/icons.min.css" rel="stylesheet" type="text/css">
+        <!-- App Css-->
+        <link href="static/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+        <script src="/static/echarts.min_new.js"></script>
+    </head>
+
+    
+    <body data-sidebar="dark">
+
+    <!-- <body data-layout="horizontal" data-topbar="colored"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+                            <a href="" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <img src="static/picture/logo-sm.png" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="static/picture/logo-dark.png" alt="" height="17">
+                                </span>
+                            </a>
+
+                            <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="static/picture/logo-sm.png" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="static/picture/logo-new.png" alt="" height="30">
+                                </span>
+                            </a>
+                        </div>
+
+                        <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+
+                        {% comment %} <div class="d-none d-sm-block">
+                            <div class="dropdown dropdown-topbar pt-3 mt-1 d-inline-block">
+                                <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Create <i class="mdi mdi-chevron-down"></i>
+                                    </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+
+                    <div class="d-flex">
+
+                        <!-- App Search-->
+                        {% comment %} <form class="app-search d-none d-lg-block">
+                            <div class="position-relative">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="fa fa-search"></span>
+                            </div>
+                        </form>
+
+                        <div class="dropdown d-inline-block d-lg-none ml-2">
+                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-search-dropdown">
+                    
+                                <form class="p-3">
+                                    <div class="form-group m-0">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> {% endcomment %}
+
+
+
+                        {% comment %} <div class="dropdown d-none d-md-block ms-2">
+                            <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="me-2" src="static/picture/us_flag.jpg" alt="Header Language" height="16"> English <span class="mdi mdi-chevron-down"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="static/picture/germany_flag.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> German </span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="static/picture/italy_flag.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Italian </span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="static/picture/french_flag.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> French </span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="static/picture/spain_flag.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Spanish </span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="static/picture/russia_flag.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Russian </span>
+                                </a>
+                            </div>
+                        </div> {% endcomment %}
+
+                        <div class="dropdown d-none d-lg-inline-block">
+                            <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                                <i class="mdi mdi-fullscreen font-size-24"></i>
+                            </button>
+                        </div>
+
+                        
+            
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle header-profile-user" src="static/picture/logo-new.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="login"><i class="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"></i> Logout</a>
+                            </div>
+                        </div>
+            
+
+         
+
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                                <i class="mdi mdi-spin mdi-cog"></i>
+                            </button>
+                        </div>
+
+         
+                    </div>
+                </div>
+            </header>
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="vertical-menu">
+
+                <div data-simplebar="" class="h-100">
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <!-- Left Menu Start -->
+                        <ul class="metismenu list-unstyled" id="side-menu">
+                            <li class="menu-title">Main</li>
+
+                            <li>
+                                <a href="" class="waves-effect">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span class="badge rounded-pill bg-primary float-end">2</span>
+                                    <span>结果展示</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="flow_collect/" class="waves-effect">
+                                    <i class="mdi mdi-chart-line"></i>
+                                    <span>采集流量</span>
+                                </a>
+                            </l>
+                            <li>
+                                <a href="flow_cut/" class="waves-effect">
+                                    <i class="mdi mdi-album"></i>
+                                    <span>流量划分</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="feature_extract/flow" class=" waves-effect">
+                                    <i class="mdi mdi-calendar-check"></i>
+                                    <span>特征提取</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="model_test/tls" class="waves-effect">
+                                    <i class="mdi mdi-responsive"></i>
+                                    <span> 模型检测 </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a href="/admin" class="waves-effect">
+                                    <i class="mdi mdi-responsive"></i>
+                                    <span> 后台管理系统</span>
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                    <!-- Sidebar -->
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="page-title-box">
+                                    <h4>模型检测</h4>
+                                        {% comment %} <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Lexa</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                            <li class="breadcrumb-item active">Dashboard</li>
+                                        </ol> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="state-information d-none d-sm-block">
+                                    <div class="state-graph">
+                                        <div id="header-chart-1"></div>
+                                        {% comment %} <div class="info">Balance $ 2,317</div> {% endcomment %}
+                                    </div>
+                                    <div class="state-graph">
+                                        <div id="header-chart-2"></div>
+                                        {% comment %} <div class="info">Item Sold 1230</div> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        
+                        <!-- end row -->
+
+                        
+                        <!-- end row -->
+
+                        <div class="row">
+
+                            
+                            <div class="col-xl-4 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">模块说明</h4>
+
+                                        <ol class="activity-feed mb-0">
+                                            <li class="feed-item">
+                                                <div class="feed-item-list">
+                                                    <span class="date"><b>收集流量模块</b></span>
+                                                    <span class="activity-text">该模块收集原始流量</span>
+                                                </div>
+                                            </li>
+                                            <li class="feed-item">
+                                                <div class="feed-item-list">
+                                                    <span class="date">流量划分模块</span>
+                                                    <span class="activity-text">该模块划分原始流量</span>
+                                                </div>
+                                            </li>
+                                            <li class="feed-item">
+                                                <div class="feed-item-list">
+                                                    <span class="date"><b>特征提取模块</b></span>
+                                                    <span class="activity-text">该模块提取特征</span>
+                                                </div>
+                                            </li>
+                                            <li class="feed-item">
+                                                <div class="feed-item-list">
+                                                    <span class="date">模型检测模块</span>
+                                                    <span class="activity-text">该模块模型预测</span>
+                                                </div>
+                                            </li>
+                                        </ol>
+
+                                        <div class="text-center">
+                                            <a href="" class="btn btn-sm btn-primary">Next</a>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">模型检测字段</h4>
+
+                                        <div id="main" style="width:100%;height:600px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+                        
+                        <!-- end row -->
+
+
+                    </div>
+                    <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+            
+                {% comment %} <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                更多模板请关注
+								<a href="http://www.cssmoban.com/"  title="网站模板">模板之家</a>
+								<a href="https://www.chazidian.com/"  title="查字典">查字典</a>
+								
+                            </div>
+                        </div>
+                    </div>
+                </footer> {% endcomment %}
+            </div>            
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- Right Sidebar -->
+        {% comment %} <div class="right-bar">
+            <div data-simplebar="" class="h-100">
+
+                <div class="rightbar-title d-flex align-items-center px-3 py-4">
+            
+                    <h5 class="m-0 me-2">Settings</h5>
+
+                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                </div>
+
+                <!-- Settings -->
+                <hr class="mt-0">
+                <h6 class="text-center mb-0">Choose Layouts</h6>
+
+                <div class="p-4">
+                    <div class="mb-2">
+                        <img src="static/picture/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input type="checkbox" class="form-check-input theme-choice" id="light-mode-switch" checked="">
+                        <label class="form-check-label" for="light-mode-switch">Light Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="static/picture/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input type="checkbox" class="form-check-input theme-choice" id="dark-mode-switch" data-bsstyle="static/assets/css/bootstrap-dark.min.css" data-appstyle="static/assets/css/app-dark.min.css">
+                        <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="static/picture/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="form-check form-switch mb-5">
+                        <input type="checkbox" class="form-check-input theme-choice" id="rtl-mode-switch" data-appstyle="static/assets/css/app-rtl.min.css">
+                        <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
+                    </div>
+
+            
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
+        </div> {% endcomment %}
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+        <script src="static/js/metisMenu.min.js"></script>
+        <script src="static/js/simplebar.min.js"></script>
+        <script src="static/js/waves.min.js"></script>
+        <script src="static/js/jquery.sparkline.min.js"></script>
+
+        <!--Morris Chart-->
+        <script src="static/js/morris.min.js"></script>
+        <script src="static/js/raphael.min.js"></script>
+
+        <script src="static/js/dashboard.init.js"></script>
+
+        <script src="static/js/app.js"></script>
+        <script type="text/javascript">
+            var chartDom = document.getElementById('main');
+            var myChart = echarts.init(chartDom);
+            var option;
+    
+            var data = [
+            {
+                name: 'Ip',
+                value: 2,
+                itemStyle: {
+                color: '#da0d68'
+                },
+                children: [
+                {
+                    name: 'ip_src',
+                    value: 1,
+                    itemStyle: {
+                    color: '#975e6d'
+                    }
+                },
+                {
+                    name: 'ip_dst',
+                    value: 1,
+                    itemStyle: {
+                    color: '#e0719c'
+                    }
+                }
+                ]
+            },
+            {
+                name: 'tcp',
+                itemStyle: {
+                color: '#da1d23'
+                },
+                children: [
+                {
+                    name: 'sport',
+                    value: 1,
+                    itemStyle: {
+                    color: '#dd4c51'
+                    }
+                },
+                {
+                    name: 'dport',
+                    value: 1,
+                    itemStyle: {
+                    color: '#c94a44'
+                    }
+                }
+                ]
+            },
+            {
+                name: 'TLS Record',
+                value: 9,
+                itemStyle: {
+                color: '#ebb40f'
+                },
+                children: [
+                {
+                    name: 'content_type',
+                    value: 3,
+                    itemStyle: {
+                    color: '#e1c315'
+                    }
+                },
+                {
+                    name: 'length',
+                    value: 3,
+                    itemStyle: {
+                    color: '#b09733'
+                    }
+                },
+                {
+                    name: 'version',
+                    value: 3
+                }
+                ]
+            },
+    
+            {
+                name: 'Certificate',
+                itemStyle: {
+                color: '#187a2f'
+                },
+                children: [
+                {
+                    name: 'cert_issuer',
+                    value: 2,
+                    itemStyle: {
+                    color: '#a2b029'
+                    }
+                },
+                {
+                    name: 'cert_subject',
+                    value: 2,
+                    itemStyle: {
+                    color: '#718933'
+                    }
+                },
+                {
+                    name: 'cert_before',
+                    value: 2,
+                    itemStyle: {
+                    color: '#3aa255'
+                    }
+                },
+                {
+                    name: 'cert_notafter',
+                    value: 2,
+                    itemStyle: {
+                    color: '#5e9a80'
+                    }
+                }
+                ]
+            },
+            {
+                name: 'Other',
+                itemStyle: {
+                color: '#0aa3b5'
+                },
+                children: [
+                {
+                    name: 'Certificate Request',
+                    itemStyle: {
+                    color: '#9db2b7'
+                    },
+                    children: [
+                    {
+                        name: 'type_count',
+                        value: 2,
+                        itemStyle: {
+                        color: '#8b8c90'
+                        }
+                    }
+                    ]
+                },
+                {
+                    name: 'Client Key Exchange',
+                    itemStyle: {
+                    color: '#76c0cb'
+                    },
+                    children: [
+                    {
+                        name: 'premaster_length',
+                        value: 2,
+                        itemStyle: {
+                        color: '#80a89d'
+                        }
+                    }
+                    ]
+                },
+                {
+                    name: 'Certificate Status',
+                    children: [
+                    {
+                        name: 'status',
+                        value: 2
+                    }
+                    ]
+                },
+                {
+                    name: 'Server Hello',
+                    children: [
+                    {
+                        name: 'cipher_suites_support',
+                        value: 2
+                    }
+                    ]
+                },
+                {
+                    name: 'Handshake',
+                    children: [
+                    {
+                        name: 'handshake_type',
+                        value: 2
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                name: 'Client Hello',
+                itemStyle: {
+                color: '#c94930'
+                },
+                children: [
+                {
+                    name: 'cipher_length',
+                    value: 3,
+                    itemStyle: {
+                    color: '#caa465'
+                    }
+                },
+                {
+                    name: 'cipher_suites',
+                    value: 3,
+                    itemStyle: {
+                    color: '#dfbd7e'
+                    }
+                }
+                ]
+            },
+            {
+                name: 'Alert',
+                itemStyle: {
+                color: '#ad213e'
+                },
+                children: [
+                {
+                    name: 'alert_level',
+                    value: 2,
+                    itemStyle: {
+                    color: '#794752'
+                    }
+                },
+                {
+                    name: 'alert_descirption',
+                    value: 2,
+                    itemStyle: {
+                    color: '#cc3d41'
+                    }
+                }
+                ]
+            }
+            ];
+            option = {
+            series: {
+                type: 'sunburst',
+                data: data,
+                radius: [0, '95%'],
+                sort: undefined,
+                emphasis: {
+                focus: 'ancestor'
+                },
+                levels: [
+                {},
+                {
+                    r0: '15%',
+                    r: '35%',
+                    itemStyle: {
+                    borderWidth: 2
+                    },
+                    label: {
+                    rotate: 'tangential'
+                    }
+                },
+                {
+                    r0: '35%',
+                    r: '70%',
+                    label: {
+                    align: 'right'
+                    }
+                },
+                {
+                    r0: '70%',
+                    r: '72%',
+                    label: {
+                    position: 'outside',
+                    padding: 3,
+                    silent: false
+                    },
+                    itemStyle: {
+                    borderWidth: 3
+                    }
+                }
+                ]
+            }
+            };
+    
+            option && myChart.setOption(option);
+        </script>
+    </body>
+
+</html>

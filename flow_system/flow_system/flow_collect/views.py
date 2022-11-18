@@ -11,7 +11,7 @@ def index(request):
     pub_date = timezone.now()
     pcap_name = str(name).replace(" ","_")
     password = '980421'
-    command = 'tcpdump -c10 -i en0 -w ./data_raw/{}.pcap'.format(pcap_name)
+    command = 'tcpdump -c100 -i en0 -w ./data_raw/{}.pcap'.format(pcap_name)
     # os.system("sudo tcpdump -c100 -i en0 -w ./data_raw/.pcap")
     os.system('echo %s | sudo -S %s' % (password, command))
     tem = Pcap(name=str(name), date=pub_date)
